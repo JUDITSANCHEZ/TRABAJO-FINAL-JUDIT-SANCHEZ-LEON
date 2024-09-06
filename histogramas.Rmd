@@ -1,0 +1,103 @@
+
+---
+title: "Untitled"
+output: html_document
+date: "2024-09-06"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+rm(list = ls())
+library(openxlsx) 
+library(readxl)
+library(tidyr)
+library(dplyr)
+```
+
+# CARGA DE LA BBDD (sin 2020 y 2021)
+```{r}
+datos <- read_excel("C:/Users/Usuario/Desktop/tfg/nacional.xls", skip = 7, n_max = 12)
+colnames(datos) <- c("Año", "Flujo_Migratorio")
+```
+## Realizamos la predicción para 2020 y 2021
+```{r}
+# Paso 1: Convertimos los datos de flujo migratorio a formato Time Series
+# Asegúrate de que tus datos tengan una columna 'Año' y una columna 'Flujo_Migratorio'
+
+# Suponiendo que 'datos' es tu data frame con columnas 'Año' y 'Flujo_Migratorio'
+ts_data <- ts(datos$Flujo_Migratorio, start = min(datos$Año), frequency = 1)
+
+# Paso 2: Ajustamos un modelo ARIMA utilizando la función auto.arima
+library(forecast)
+fit <- auto.arima(ts_data)
+
+# Paso 3: Extraemos los términos p, d, y q del modelo ARIMA ajustado
+order <- arimaorder(fit)
+modelo_arima <- paste0("ARIMA(", order[1], ",", order[2], ",", order[3], ")")
+
+# Paso 4: Hacemos la predicción para los próximos 2 años (por ejemplo, 2020 y 2021)
+predicciones <- forecast(fit, h = 2)
+predicciones <- round(as.numeric(predicciones$mean), 0)  # Redondeamos las predicciones
+
+# Paso 5: Creamos un data frame para almacenar los resultados
+resultados <- data.frame(
+  Año = c(2020, 2021), 
+  Prediccion_Flujo_Migratorio = predicciones,
+  Modelo_ARIMA = c(modelo_arima, modelo_arima)
+)
+
+# Mostramos los resultados
+print(resultados)
+```
+
+## Unimos los valores predichos de 2020 y 2021 a la BBDD
+```{r}
+prediccion <- resultados[,c(1,2)]
+colnames(prediccion) <- c("Año", "Flujo_Migratorio")
+datos_predichos <- rbind(datos, prediccion)
+```
+
+## Graficamos los resultados
+```{r}
+# Creamos el gráfico de barras
+library(ggplot2)
+library(scales)
+
+hist_predichos <- ggplot(datos_predichos, aes(x = factor(Año), y = Flujo_Migratorio)) + 
+  geom_bar(stat = "identity", fill = "lightblue", color = "black") +  
+  labs(title = "Flujo Migratorio por Año (Predicción 2020 y 2021)", x = "Año", y = "Flujo Migratorio") +  
+  theme_minimal() +  
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  scale_y_continuous(labels = comma, limits = c(300000, NA), oob = scales::rescale_none) +  
+  theme(axis.text.y = element_text(angle = 0))
+```
+
+# CARGA DE LA BBDD (con 2020 y 2021)
+```{r}
+datos_real <- read_excel("C:/Users/Usuario/Desktop/tfg/nacional.xls", skip = 7, n_max = 14)
+colnames(datos_real) <- c("Año", "Flujo_Migratorio")
+```
+## Graficamos los resultados
+```{r}
+# Creamos el gráfico de barras
+library(ggplot2)
+library(scales)
+
+hist_real <- ggplot(datos_real, aes(x = factor(Año), y = Flujo_Migratorio)) + 
+  geom_bar(stat = "identity", fill = "lightblue", color = "black") +  
+  labs(title = "Flujo Migratorio por Año (Datos Reales)", x = "Año", y = "Flujo Migratorio") +  
+  theme_minimal() +  
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  scale_y_continuous(labels = comma, limits = c(300000, NA), oob = scales::rescale_none) +  
+  theme(axis.text.y = element_text(angle = 0))
+```
+
+## Guardamos los gráficos
+```{r}
+ggsave("C:/Users/Usuario/Desktop/tfg/histograma_predicho.png", plot = hist_predichos)
+ggsave("C:/Users/Usuario/Desktop/tfg/histograma_real.png", plot = hist_real)
+```
+
