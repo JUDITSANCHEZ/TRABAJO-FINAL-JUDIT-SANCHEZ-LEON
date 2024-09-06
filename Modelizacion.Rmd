@@ -1,0 +1,81 @@
+---
+title: ''
+author: "Judit Sánchez León"
+date: "2024-09-03"
+output: html_document
+---
+
+
+
+
+```{r}
+rm(list = ls())
+# Instalar el paquete 
+#install.packages("fixest")
+#install.packages("AER")
+#install.packages("lfe")
+
+#Cargar los paquetes
+library(lfe)
+library(AER)
+library(fixest)
+library(readxl)
+
+datos <-read_excel("C:/Users/Usuario/Desktop/tfg/DATOS_FINAL_JUNTOS.xlsx")
+
+
+
+# Especificamos el modelo PPML con efectos fijos
+ppml <- feglm(flujo_migratorio ~ log(pib_o) + log(pib_d) + log(distancia) + log(poblacion_o) + log(poblacion_d) +
+                tasa_desempleo_o + tasa_desempleo_d +vivienda_o+vivienda_d+ampi_o+ampi_d+ contigu  | CCAA_o+ CCAA_d+ Year, 
+                data = datos , 
+                family = poisson())
+
+# Mostrar los resultados del modelo
+summary(ppml)
+
+
+# Mostramos los resultados del modelo con un formato más bonito
+library(sjPlot)
+library(sjmisc)
+library(sjlabelled)
+
+#tab_model(ppml, collapse.ci = T, digits = 4, show.se = T, show.stat = T, transform = NULL, file = "C:/TFG FLAKITA/modelo_ppml2.html")
+
+tab_model(ppml, collapse.ci = T, digits = 4, show.se = T, show.stat = T, file = "C:/Users/Usuario/Desktop/tfg/modelo_ppml.html") 
+
+#El segundo modelo (sin el transform = NULL) presenta los Incidence Rate Ratios (IRR) en lugar de los coeficientes estimados (Estimate) porque estamos delante de un modelo basado en la distribución de Poisson. Los IRR son simplemente la exponenciación de los coeficientes estimados (es decir, e^coef), lo que facilita la interpretación en términos de tasas relativas
+```
+
+
+
+
+```{r}
+
+#Modelo OLS con efectos fijos 
+
+ols <- felm(flujo_migratorio ~ log(pib_o) + log(pib_d) + log(distancia) + log(poblacion_o) + log(poblacion_d) +
+                tasa_desempleo_o + tasa_desempleo_d + vivienda_o + vivienda_d + ampi_o + ampi_d + contigu | 
+                CCAA_o + CCAA_d + Year, 
+            data = datos)
+
+summary(ols)
+
+tab_model(ols, collapse.ci = T, digits = 2, show.se = T, show.stat = T, file = "C:/Users/Usuario/Desktop/tfg/modelo_ols.html")
+
+```
+
+```{r}
+
+#Modelo OLS sin efectos fijos 
+
+
+ols_basico <- lm(flujo_migratorio ~ log(pib_o) + log(pib_d) + log(distancia) + log(poblacion_o) + log(poblacion_d) +
+                  tasa_desempleo_o + tasa_desempleo_d + vivienda_o + vivienda_d + ampi_o + ampi_d + contigu + 
+                  factor(CCAA_o) + factor(CCAA_d) + factor(Year), 
+                 data = datos)
+
+summary(ols_basico)
+ 
+tab_model(ols_basico, collapse.ci = T, digits = 2, show.se = T, show.stat = T, file = "C:/Users/Usuario/Desktop/tfg/modelo_ols_basico.html")
+```

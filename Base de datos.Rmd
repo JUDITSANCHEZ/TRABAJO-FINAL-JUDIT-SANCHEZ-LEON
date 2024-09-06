@@ -1,0 +1,3396 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-08-26"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+rm(list = ls())
+library(openxlsx)  
+```
+
+
+# 2008
+```{r}
+library(readxl)
+datos_2008 <- read_excel("C:/Users/Usuario/Desktop/tfg/DATOS.xlsx", sheet = "2008")
+
+library(dplyr)
+
+#POBLACION
+
+datos_2008 <- datos_2008 %>%
+  mutate(poblacion_o = case_when(
+    CCAA_o == "AN" ~ 8118575,
+    CCAA_o == "AR" ~ 1325426,
+    CCAA_o == "AS" ~ 1071081,
+    CCAA_o == "IB" ~ 1042855,
+    CCAA_o == "CN" ~ 1991945,
+    CCAA_o == "CB" ~ 577266,
+    CCAA_o == "CL" ~ 2541717,
+    CCAA_o == "CM" ~ 2031828,
+    CCAA_o == "CT" ~ 7311146,
+    CCAA_o == "VC" ~ 4928093,
+    CCAA_o == "EX" ~ 1089650,
+    CCAA_o == "GA" ~ 2754768,
+    CCAA_o == "MD" ~ 6226195,
+    CCAA_o == "MC" ~ 1419567,
+    CCAA_o == "NC" ~ 616711,
+    CCAA_o == "PV" ~ 2159427,
+    CCAA_o == "RI" ~ 316192,
+    TRUE ~ poblacion_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2008 <- datos_2008 %>%
+  mutate(poblacion_d = case_when(
+    CCAA_d == "AN" ~ 8118575,
+    CCAA_d == "AR" ~ 1325426,
+    CCAA_d == "AS" ~ 1071081,
+    CCAA_d == "IB" ~ 1042855,
+    CCAA_d == "CN" ~ 1991945,
+    CCAA_d == "CB" ~ 577266,
+    CCAA_d == "CL" ~ 2541717,
+    CCAA_d == "CM" ~ 2031828,
+    CCAA_d == "CT" ~ 7311146,
+    CCAA_d == "VC" ~ 4928093,
+    CCAA_d == "EX" ~ 1089650,
+    CCAA_d == "GA" ~ 2754768,
+    CCAA_d == "MD" ~ 6226195,
+    CCAA_d == "MC" ~ 1419567,
+    CCAA_d == "NC" ~ 616711,
+    CCAA_d == "PV" ~ 2159427,
+    CCAA_d == "RI" ~ 316192,
+    TRUE ~ poblacion_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#PIB
+
+datos_2008 <- datos_2008 %>%
+  mutate(pib_o = case_when(
+    CCAA_o == "AN" ~ 151226849,
+    CCAA_o == "AR" ~ 35141063,
+    CCAA_o == "AS" ~ 23844408,
+    CCAA_o == "IB" ~ 27574628,
+    CCAA_o == "CN" ~ 42308705,
+    CCAA_o == "CB" ~ 13260788,
+    CCAA_o == "CL" ~ 56637995,
+    CCAA_o == "CM" ~ 39926198,
+    CCAA_o == "CT" ~ 207716061,
+    CCAA_o == "VC" ~ 107508471,
+    CCAA_o == "EX" ~ 18249829,
+    CCAA_o == "GA" ~ 58358648,
+    CCAA_o == "MD" ~ 201235501,
+    CCAA_o == "MC" ~ 29098291,
+    CCAA_o == "NC" ~ 18517376,
+    CCAA_o == "PV" ~ 66779471,
+    CCAA_o == "RI" ~ 8247306,
+    TRUE ~ pib_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2008 <- datos_2008 %>%
+  mutate(pib_d = case_when(
+    CCAA_d == "AN" ~ 151226849,
+    CCAA_d == "AR" ~ 35141063,
+    CCAA_d == "AS" ~ 23844408,
+    CCAA_d == "IB" ~ 27574628,
+    CCAA_d == "CN" ~ 42308705,
+    CCAA_d == "CB" ~ 13260788,
+    CCAA_d == "CL" ~ 56637995,
+    CCAA_d == "CM" ~ 39926198,
+    CCAA_d == "CT" ~ 207716061,
+    CCAA_d == "VC" ~ 107508471,
+    CCAA_d == "EX" ~ 18249829,
+    CCAA_d == "GA" ~ 58358648,
+    CCAA_d == "MD" ~ 201235501,
+    CCAA_d == "MC" ~ 29098291,
+    CCAA_d == "NC" ~ 18517376,
+    CCAA_d == "PV" ~ 66779471,
+    CCAA_d == "RI" ~ 8247306,
+    TRUE ~ pib_d # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#VIVIENDA
+datos_2008 <- datos_2008 %>%
+  mutate(vivienda_o = case_when(
+    CCAA_o == "AN" ~ 134.534 ,
+    CCAA_o == "AR" ~ 171.55,
+    CCAA_o == "AS" ~ 145.647,
+    CCAA_o == "IB" ~ 137.526,
+    CCAA_o == "CN" ~ 139.782,
+    CCAA_o == "CB" ~ 153.98,
+    CCAA_o == "CL" ~ 152.999,
+    CCAA_o == "CM" ~ 149.222,
+    CCAA_o == "CT" ~ 162.199,
+    CCAA_o == "VC" ~ 145.206,
+    CCAA_o == "EX" ~ 137.785,
+    CCAA_o == "GA" ~ 140.439,
+    CCAA_o == "MD" ~ 149.458,
+    CCAA_o == "MC" ~ 140.303,
+    CCAA_o == "NC" ~ 179.108,
+    CCAA_o == "PV" ~ 157.062,
+    CCAA_o == "RI" ~ 170.416,
+    TRUE ~ vivienda_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2008 <- datos_2008 %>%
+  mutate(vivienda_d = case_when(
+    CCAA_d == "AN" ~ 134.534 ,
+    CCAA_d == "AR" ~ 171.55,
+    CCAA_d == "AS" ~ 145.647,
+    CCAA_d == "IB" ~ 137.526,
+    CCAA_d == "CN" ~ 139.782,
+    CCAA_d == "CB" ~ 153.98,
+    CCAA_d == "CL" ~ 152.999,
+    CCAA_d == "CM" ~ 149.222,
+    CCAA_d == "CT" ~ 162.199,
+    CCAA_d == "VC" ~ 145.206,
+    CCAA_d == "EX" ~ 137.785,
+    CCAA_d == "GA" ~ 140.439,
+    CCAA_d == "MD" ~ 149.458,
+    CCAA_d == "MC" ~ 140.303,
+    CCAA_d == "NC" ~ 179.108,
+    CCAA_d == "PV" ~ 157.062,
+    CCAA_d == "RI" ~ 170.416,
+    TRUE ~ vivienda_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#DESEMPLEO
+datos_2008 <- datos_2008 %>%
+  mutate(tasa_desempleo_o = case_when(
+    CCAA_o == "AN" ~ 17.73,
+    CCAA_o == "AR" ~ 7.29,
+    CCAA_o == "AS" ~ 8.50,
+    CCAA_o == "IB" ~ 10.16,
+    CCAA_o == "CN" ~ 17.25,
+    CCAA_o == "CB" ~ 7.16,
+    CCAA_o == "CL" ~ 9.62,
+    CCAA_o == "CM" ~ 11.67,
+    CCAA_o == "CT" ~ 8.89,
+    CCAA_o == "VC" ~ 11.99,
+    CCAA_o == "EX" ~ 15.35,
+    CCAA_o == "GA" ~ 8.64,
+    CCAA_o == "MD" ~ 8.61,
+    CCAA_o == "MC" ~ 12.44,
+    CCAA_o == "NC" ~ 6.83,
+    CCAA_o == "PV" ~ 6.63,
+    CCAA_o == "RI" ~ 7.90,
+    TRUE ~ tasa_desempleo_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2008 <- datos_2008 %>%
+  mutate(tasa_desempleo_d = case_when(
+    CCAA_d == "AN" ~ 17.73,
+    CCAA_d == "AR" ~ 7.29,
+    CCAA_d == "AS" ~ 8.50,
+    CCAA_d == "IB" ~ 10.16,
+    CCAA_d == "CN" ~ 17.25,
+    CCAA_d == "CB" ~ 7.16,
+    CCAA_d == "CL" ~ 9.62,
+    CCAA_d == "CM" ~ 11.67,
+    CCAA_d == "CT" ~ 8.89,
+    CCAA_d == "VC" ~ 11.99,
+    CCAA_d == "EX" ~ 15.35,
+    CCAA_d == "GA" ~ 8.64,
+    CCAA_d == "MD" ~ 8.61,
+    CCAA_d == "MC" ~ 12.44,
+    CCAA_d == "NC" ~ 6.83,
+    CCAA_d == "PV" ~ 6.63,
+    CCAA_d == "RI" ~ 7.90,
+    TRUE ~ tasa_desempleo_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#AMPI
+datos_2008 <- datos_2008 %>%
+  mutate(ampi_o = case_when(
+    CCAA_o == "AN" ~ 97.74 ,
+    CCAA_o == "AR" ~ 101.95,
+    CCAA_o == "AS" ~ 102.52,
+    CCAA_o == "IB" ~ 101.03,
+    CCAA_o == "CN" ~ 97.49,
+    CCAA_o == "CB" ~ 102.13,
+    CCAA_o == "CL" ~ 99.04,
+    CCAA_o == "CM" ~ 100.02,
+    CCAA_o == "CT" ~ 100.33,
+    CCAA_o == "VC" ~ 100.33,
+    CCAA_o == "EX" ~ 98.83,
+    CCAA_o == "GA" ~ 97.12,
+    CCAA_o == "MD" ~ 100.71,
+    CCAA_o == "MC" ~ 100.21,
+    CCAA_o == "NC" ~ 105.27,
+    CCAA_o == "PV" ~ 101.73,
+    CCAA_o == "RI" ~ 103.45,
+    TRUE ~ ampi_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2008 <- datos_2008 %>%
+  mutate(ampi_d = case_when(
+    CCAA_d == "AN" ~ 97.74 ,
+    CCAA_d == "AR" ~ 101.95,
+    CCAA_d == "AS" ~ 102.52,
+    CCAA_d == "IB" ~ 101.03,
+    CCAA_d == "CN" ~ 97.49,
+    CCAA_d == "CB" ~ 102.13,
+    CCAA_d == "CL" ~ 99.04,
+    CCAA_d == "CM" ~ 100.02,
+    CCAA_d == "CT" ~ 100.33,
+    CCAA_d == "VC" ~ 100.33,
+    CCAA_d == "EX" ~ 98.83,
+    CCAA_d == "GA" ~ 97.12,
+    CCAA_d == "MD" ~ 100.71,
+    CCAA_d == "MC" ~ 100.21,
+    CCAA_d == "NC" ~ 105.27,
+    CCAA_d == "PV" ~ 101.73,
+    CCAA_d == "RI" ~ 103.45,
+    TRUE ~ ampi_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+```
+
+
+# 2009
+```{r}
+library(readxl)
+datos_2009 <- read_excel("C:/Users/Usuario/Desktop/tfg/DATOS.xlsx", sheet = "2009")
+
+library(dplyr)
+
+#POBLACION
+
+datos_2009 <- datos_2009 %>%
+  mutate(poblacion_o = case_when(
+    CCAA_o == "AN" ~ 8212986,
+    CCAA_o == "AR" ~ 1342778,
+    CCAA_o == "AS" ~ 1076280,
+    CCAA_o == "IB" ~ 1070164,
+    CCAA_o == "CN" ~ 2025486,
+    CCAA_o == "CB" ~ 584655,
+    CCAA_o == "CL" ~ 2549174,
+    CCAA_o == "CM" ~ 2066417,
+    CCAA_o == "CT" ~ 7427089,
+    CCAA_o == "VC" ~ 4981276,
+    CCAA_o == "EX" ~ 1094691,
+    CCAA_o == "GA" ~ 2767474,
+    CCAA_o == "MD" ~ 6327594,
+    CCAA_o == "MC" ~ 1441783,
+    CCAA_o == "NC" ~ 627276,
+    CCAA_o == "PV" ~ 2174080,
+    CCAA_o == "RI" ~ 319786,
+    TRUE ~ poblacion_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2009 <- datos_2009 %>%
+  mutate(poblacion_d = case_when(
+    CCAA_d == "AN" ~ 8212986,
+    CCAA_d == "AR" ~ 1342778,
+    CCAA_d == "AS" ~ 1076280,
+    CCAA_d == "IB" ~ 1070164,
+    CCAA_d == "CN" ~ 2025486,
+    CCAA_d == "CB" ~ 584655,
+    CCAA_d == "CL" ~ 2549174,
+    CCAA_d == "CM" ~ 2066417,
+    CCAA_d == "CT" ~ 7427089,
+    CCAA_d == "VC" ~ 4981276,
+    CCAA_d == "EX" ~ 1094691,
+    CCAA_d == "GA" ~ 2767474,
+    CCAA_d == "MD" ~ 6327594,
+    CCAA_d == "MC" ~ 1441783,
+    CCAA_d == "NC" ~ 627276,
+    CCAA_d == "PV" ~ 2174080,
+    CCAA_d == "RI" ~ 319786,
+    TRUE ~ poblacion_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#PIB
+
+datos_2009 <- datos_2009 %>%
+  mutate(pib_o = case_when(
+    CCAA_o == "AN" ~ 144878289,
+    CCAA_o == "AR" ~ 33564425,
+    CCAA_o == "AS" ~ 22541896,
+    CCAA_o == "IB" ~ 26478337,
+    CCAA_o == "CN" ~ 40296021,
+    CCAA_o == "CB" ~ 12788985,
+    CCAA_o == "CL" ~ 54795978,
+    CCAA_o == "CM" ~ 38582257,
+    CCAA_o == "CT" ~ 200139996,
+    CCAA_o == "VC" ~ 101443496,
+    CCAA_o == "EX" ~ 17829466,
+    CCAA_o == "GA" ~ 56303675,
+    CCAA_o == "MD" ~ 198374372,
+    CCAA_o == "MC" ~ 27670321,
+    CCAA_o == "NC" ~ 17896504,
+    CCAA_o == "PV" ~ 63926115,
+    CCAA_o == "RI" ~ 7893077,
+    TRUE ~ pib_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2009 <- datos_2009 %>%
+  mutate(pib_d = case_when(
+    CCAA_d == "AN" ~ 144878289,
+    CCAA_d == "AR" ~ 33564425,
+    CCAA_d == "AS" ~ 22541896,
+    CCAA_d == "IB" ~ 26478337,
+    CCAA_d == "CN" ~ 40296021,
+    CCAA_d == "CB" ~ 12788985,
+    CCAA_d == "CL" ~ 54795978,
+    CCAA_d == "CM" ~ 38582257,
+    CCAA_d == "CT" ~ 200139996,
+    CCAA_d == "VC" ~ 101443496,
+    CCAA_d == "EX" ~ 17829466,
+    CCAA_d == "GA" ~ 56303675,
+    CCAA_d == "MD" ~ 198374372,
+    CCAA_d == "MC" ~ 27670321,
+    CCAA_d == "NC" ~ 17896504,
+    CCAA_d == "PV" ~ 63926115,
+    CCAA_d == "RI" ~ 7893077,
+    TRUE ~ pib_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#VIVIENDA
+datos_2009 <- datos_2009 %>%
+  mutate(vivienda_o = case_when(
+    CCAA_o == "AN" ~ 130.163,
+    CCAA_o == "AR" ~ 156.466,
+    CCAA_o == "AS" ~ 144.298,
+    CCAA_o == "IB" ~ 126.278,
+    CCAA_o == "CN" ~ 134.441,
+    CCAA_o == "CB" ~ 143.507,
+    CCAA_o == "CL" ~ 148.896,
+    CCAA_o == "CM" ~ 144.77,
+    CCAA_o == "CT" ~ 143.716,
+    CCAA_o == "VC" ~ 137.298,
+    CCAA_o == "EX" ~ 137.26,
+    CCAA_o == "GA" ~ 138.72,
+    CCAA_o == "MD" ~ 133.981,
+    CCAA_o == "MC" ~ 138.882,
+    CCAA_o == "NC" ~ 161.204,
+    CCAA_o == "PV" ~ 140.915,
+    CCAA_o == "RI" ~ 161.125,
+    TRUE ~ vivienda_o  #Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+
+datos_2009 <- datos_2009 %>%
+  mutate(vivienda_d = case_when(
+    CCAA_d == "AN" ~ 130.163,
+    CCAA_d == "AR" ~ 156.466,
+    CCAA_d == "AS" ~ 144.298,
+    CCAA_d == "IB" ~ 126.278,
+    CCAA_d == "CN" ~ 134.441,
+    CCAA_d == "CB" ~ 143.507,
+    CCAA_d == "CL" ~ 148.896,
+    CCAA_d == "CM" ~ 144.77,
+    CCAA_d == "CT" ~ 143.716,
+    CCAA_d == "VC" ~ 137.298,
+    CCAA_d == "EX" ~ 137.26,
+    CCAA_d == "GA" ~ 138.72,
+    CCAA_d == "MD" ~ 133.981,
+    CCAA_d == "MC" ~ 138.882,
+    CCAA_d == "NC" ~ 161.204,
+    CCAA_d == "PV" ~ 140.915,
+    CCAA_d == "RI" ~ 161.125,
+    TRUE ~ vivienda_d  #Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#DESEMPLEO
+datos_2009 <- datos_2009 %>%
+  mutate(tasa_desempleo_o = case_when(
+    CCAA_o == "AN" ~ 25.24,
+    CCAA_o == "AR" ~ 13.05,
+    CCAA_o == "AS" ~ 13.42,
+    CCAA_o == "IB" ~ 17.92,
+    CCAA_o == "CN" ~ 26.01,
+    CCAA_o == "CB" ~ 12,
+    CCAA_o == "CL" ~ 13.98,
+    CCAA_o == "CM" ~ 18.88,
+    CCAA_o == "CT" ~ 16.22,
+    CCAA_o == "VC" ~ 20.76,
+    CCAA_o == "EX" ~ 20.63,
+    CCAA_o == "GA" ~ 12.44,
+    CCAA_o == "MD" ~ 13.86,
+    CCAA_o == "MC" ~ 20.32,
+    CCAA_o == "NC" ~ 10.84,
+    CCAA_o == "PV" ~ 11.34,
+    CCAA_o == "RI" ~ 12.64,
+    TRUE ~ tasa_desempleo_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2009 <- datos_2009 %>%
+  mutate(tasa_desempleo_d = case_when(
+    CCAA_d == "AN" ~ 25.24,
+    CCAA_d == "AR" ~ 13.05,
+    CCAA_d == "AS" ~ 13.42,
+    CCAA_d == "IB" ~ 17.92,
+    CCAA_d == "CN" ~ 26.01,
+    CCAA_d == "CB" ~ 12,
+    CCAA_d == "CL" ~ 13.98,
+    CCAA_d == "CM" ~ 18.88,
+    CCAA_d == "CT" ~ 16.22,
+    CCAA_d == "VC" ~ 20.76,
+    CCAA_d == "EX" ~ 20.63,
+    CCAA_d == "GA" ~ 12.44,
+    CCAA_d == "MD" ~ 13.86,
+    CCAA_d == "MC" ~ 20.32,
+    CCAA_d == "NC" ~ 10.84,
+    CCAA_d == "PV" ~ 11.34,
+    CCAA_d == "RI" ~ 12.64,
+    TRUE ~ tasa_desempleo_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#AMPI
+datos_2009 <- datos_2009 %>%
+  mutate(ampi_o = case_when(
+    CCAA_o == "AN" ~ 97.32,
+    CCAA_o == "AR" ~ 102.33,
+    CCAA_o == "AS" ~ 102.00,
+    CCAA_o == "IB" ~ 100.97,
+    CCAA_o == "CN" ~ 96.78,
+    CCAA_o == "CB" ~ 101.72,
+    CCAA_o == "CL" ~ 98.90,
+    CCAA_o == "CM" ~ 99.76,
+    CCAA_o == "CT" ~ 99.65,
+    CCAA_o == "VC" ~ 100.37,
+    CCAA_o == "EX" ~ 98.48,
+    CCAA_o == "GA" ~ 96.40,
+    CCAA_o == "MD" ~ 100.39,
+    CCAA_o == "MC" ~ 99.17,
+    CCAA_o == "NC" ~ 104.99,
+    CCAA_o == "PV" ~ 101.96,
+    CCAA_o == "RI" ~ 103.39,
+    TRUE ~ ampi_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2009 <- datos_2009 %>%
+  mutate(ampi_d = case_when(
+    CCAA_d == "AN" ~ 97.32,
+    CCAA_d == "AR" ~ 102.33,
+    CCAA_d == "AS" ~ 102.00,
+    CCAA_d == "IB" ~ 100.97,
+    CCAA_d == "CN" ~ 96.78,
+    CCAA_d == "CB" ~ 101.72,
+    CCAA_d == "CL" ~ 98.90,
+    CCAA_d == "CM" ~ 99.76,
+    CCAA_d == "CT" ~ 99.65,
+    CCAA_d == "VC" ~ 100.37,
+    CCAA_d == "EX" ~ 98.48,
+    CCAA_d == "GA" ~ 96.40,
+    CCAA_d == "MD" ~ 100.39,
+    CCAA_d == "MC" ~ 99.17,
+    CCAA_d == "NC" ~ 104.99,
+    CCAA_d == "PV" ~ 101.96,
+    CCAA_d == "RI" ~ 103.39,
+    TRUE ~ ampi_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+```
+
+
+# 2010
+```{r}
+library(readxl)
+datos_2010 <- read_excel("C:/Users/Usuario/Desktop/tfg/DATOS.xlsx", sheet = "2010")
+
+library(dplyr)
+
+
+#POBLACION
+datos_2010 <- datos_2010 %>%
+  mutate(poblacion_o = case_when(
+    CCAA_o == "AN" ~ 8276017,
+    CCAA_o == "AR" ~ 1344184,
+    CCAA_o == "AS" ~ 1077103,
+    CCAA_o == "IB" ~ 1083683,
+    CCAA_o == "CN" ~ 2045168,
+    CCAA_o == "CB" ~ 588518,
+    CCAA_o == "CL" ~ 2547408,
+    CCAA_o == "CM" ~ 2084470,
+    CCAA_o == "CT" ~ 7463471,
+    CCAA_o == "VC" ~ 4989631,
+    CCAA_o == "EX" ~ 1099605,
+    CCAA_o == "GA" ~ 2772457,
+    CCAA_o == "MD" ~ 6373532,
+    CCAA_o == "MC" ~ 1453545,
+    CCAA_o == "NC" ~ 633017,
+    CCAA_o == "PV" ~ 2179532,
+    CCAA_o == "RI" ~ 319939,
+    TRUE ~ poblacion_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2010 <- datos_2010 %>%
+  mutate(poblacion_d = case_when(
+    CCAA_d == "AN" ~ 8276017,
+    CCAA_d == "AR" ~ 1344184,
+    CCAA_d == "AS" ~ 1077103,
+    CCAA_d == "IB" ~ 1083683,
+    CCAA_d == "CN" ~ 2045168,
+    CCAA_d == "CB" ~ 588518,
+    CCAA_d == "CL" ~ 2547408,
+    CCAA_d == "CM" ~ 2084470,
+    CCAA_d == "CT" ~ 7463471,
+    CCAA_d == "VC" ~ 4989631,
+    CCAA_d == "EX" ~ 1099605,
+    CCAA_d == "GA" ~ 2772457,
+    CCAA_d == "MD" ~ 6373532,
+    CCAA_d == "MC" ~ 1453545,
+    CCAA_d == "NC" ~ 633017,
+    CCAA_d == "PV" ~ 2179532,
+    CCAA_d == "RI" ~ 319939,
+    TRUE ~ poblacion_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#PIB 
+datos_2010 <- datos_2010 %>%
+  mutate(pib_o = case_when(
+    CCAA_o == "AN" ~ 144752225,
+    CCAA_o == "AR" ~ 33828995,
+    CCAA_o == "AS" ~ 22733586,
+    CCAA_o == "IB" ~ 26535097,
+    CCAA_o == "CN" ~ 40811481,
+    CCAA_o == "CB" ~ 12836685,
+    CCAA_o == "CL" ~ 54970431,
+    CCAA_o == "CM" ~ 38706827,
+    CCAA_o == "CT" ~ 201705890,
+    CCAA_o == "VC" ~ 101201463,
+    CCAA_o == "EX" ~ 18135329,
+    CCAA_o == "GA" ~ 56767263,
+    CCAA_o == "MD" ~ 197145571,
+    CCAA_o == "MC" ~ 27912742,
+    CCAA_o == "NC" ~ 17973969,
+    CCAA_o == "PV" ~ 64680368,
+    CCAA_o == "RI" ~ 7977333,
+    TRUE ~ pib_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+
+datos_2010 <- datos_2010 %>%
+  mutate(pib_d = case_when(
+    CCAA_d == "AN" ~ 144752225,
+    CCAA_d == "AR" ~ 33828995,
+    CCAA_d == "AS" ~ 22733586,
+    CCAA_d == "IB" ~ 26535097,
+    CCAA_d == "CN" ~ 40811481,
+    CCAA_d == "CB" ~ 12836685,
+    CCAA_d == "CL" ~ 54970431,
+    CCAA_d == "CM" ~ 38706827,
+    CCAA_d == "CT" ~ 201705890,
+    CCAA_d == "VC" ~ 101201463,
+    CCAA_d == "EX" ~ 18135329,
+    CCAA_d == "GA" ~ 56767263,
+    CCAA_d == "MD" ~ 197145571,
+    CCAA_d == "MC" ~ 27912742,
+    CCAA_d == "NC" ~ 17973969,
+    CCAA_d == "PV" ~ 64680368,
+    CCAA_d == "RI" ~ 7977333,
+    TRUE ~ pib_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#VIVIENDA
+datos_2010 <- datos_2010 %>%
+  mutate(vivienda_o = case_when(
+    CCAA_o == "AN" ~ 128.108,
+    CCAA_o == "AR" ~ 147.964,
+    CCAA_o == "AS" ~ 142.195,
+    CCAA_o == "IB" ~ 123.729,
+    CCAA_o == "CN" ~ 131.108,
+    CCAA_o == "CB" ~ 134.886,
+    CCAA_o == "CL" ~ 144.791,
+    CCAA_o == "CM" ~ 143.137,
+    CCAA_o == "CT" ~ 139.892,
+    CCAA_o == "VC" ~ 133.02,
+    CCAA_o == "EX" ~ 139.248,
+    CCAA_o == "GA" ~ 136.011,
+    CCAA_o == "MD" ~ 134.509,
+    CCAA_o == "MC" ~ 137.444,
+    CCAA_o == "NC" ~ 151.057,
+    CCAA_o == "PV" ~ 138.62,
+    CCAA_o == "RI" ~ 155.023,
+    TRUE ~ vivienda_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2010 <- datos_2010 %>%
+  mutate(vivienda_d = case_when(
+    CCAA_d == "AN" ~ 128.108,
+    CCAA_d == "AR" ~ 147.964,
+    CCAA_d == "AS" ~ 142.195,
+    CCAA_d == "IB" ~ 123.729,
+    CCAA_d == "CN" ~ 131.108,
+    CCAA_d == "CB" ~ 134.886,
+    CCAA_d == "CL" ~ 144.791,
+    CCAA_d == "CM" ~ 143.137,
+    CCAA_d == "CT" ~ 139.892,
+    CCAA_d == "VC" ~ 133.02,
+    CCAA_d == "EX" ~ 139.248,
+    CCAA_d == "GA" ~ 136.011,
+    CCAA_d == "MD" ~ 134.509,
+    CCAA_d == "MC" ~ 137.444,
+    CCAA_d == "NC" ~ 151.057,
+    CCAA_d == "PV" ~ 138.62,
+    CCAA_d == "RI" ~ 155.023,
+    TRUE ~ vivienda_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#DESEMPLEO
+datos_2010 <- datos_2010 %>%
+  mutate(tasa_desempleo_o = case_when(
+    CCAA_o == "AN" ~ 27.77,
+    CCAA_o == "AR" ~ 14.96,
+    CCAA_o == "AS" ~ 15.92,
+    CCAA_o == "IB" ~ 20.12,
+    CCAA_o == "CN" ~ 28.6,
+    CCAA_o == "CB" ~ 13.7,
+    CCAA_o == "CL" ~ 15.8,
+    CCAA_o == "CM" ~ 21.22,
+    CCAA_o == "CT" ~ 17.66,
+    CCAA_o == "VC" ~ 22.86,
+    CCAA_o == "EX" ~ 22.97,
+    CCAA_o == "GA" ~ 15.32,
+    CCAA_o == "MD" ~ 15.84,
+    CCAA_o == "MC" ~ 22.87,
+    CCAA_o == "NC" ~ 11.9,
+    CCAA_o == "PV" ~ 10.69,
+    CCAA_o == "RI" ~ 14.15,
+    TRUE ~ tasa_desempleo_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2010 <- datos_2010 %>%
+  mutate(tasa_desempleo_d = case_when(
+    CCAA_d == "AN" ~ 27.77,
+    CCAA_d == "AR" ~ 14.96,
+    CCAA_d == "AS" ~ 15.92,
+    CCAA_d == "IB" ~ 20.12,
+    CCAA_d == "CN" ~ 28.6,
+    CCAA_d == "CB" ~ 13.7,
+    CCAA_d == "CL" ~ 15.8,
+    CCAA_d == "CM" ~ 21.22,
+    CCAA_d == "CT" ~ 17.66,
+    CCAA_d == "VC" ~ 22.86,
+    CCAA_d == "EX" ~ 22.97,
+    CCAA_d == "GA" ~ 15.32,
+    CCAA_d == "MD" ~ 15.84,
+    CCAA_d == "MC" ~ 22.87,
+    CCAA_d == "NC" ~ 11.9,
+    CCAA_d == "PV" ~ 10.69,
+    CCAA_d == "RI" ~ 14.15,
+    TRUE ~ tasa_desempleo_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#AMPI
+datos_2010 <- datos_2010 %>%
+  mutate(ampi_o = case_when(
+    CCAA_o == "AN" ~ 97.63,
+    CCAA_o == "AR" ~ 102.86,
+    CCAA_o == "AS" ~ 102.59,
+    CCAA_o == "IB" ~ 101.46,
+    CCAA_o == "CN" ~ 97.73,
+    CCAA_o == "CB" ~ 101.82,
+    CCAA_o == "CL" ~ 98.93,
+    CCAA_o == "CM" ~ 100.33,
+    CCAA_o == "CT" ~ 100.34,
+    CCAA_o == "VC" ~ 101.03,
+    CCAA_o == "EX" ~ 98.47,
+    CCAA_o == "GA" ~ 96.87,
+    CCAA_o == "MD" ~ 100.95,
+    CCAA_o == "MC" ~ 99.10,
+    CCAA_o == "NC" ~ 104.95,
+    CCAA_o == "PV" ~ 102.11,
+    CCAA_o == "RI" ~ 103.68,
+    TRUE ~ ampi_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2010 <- datos_2010 %>%
+  mutate(ampi_d = case_when(
+    CCAA_d == "AN" ~ 97.63,
+    CCAA_d == "AR" ~ 102.86,
+    CCAA_d == "AS" ~ 102.59,
+    CCAA_d == "IB" ~ 101.46,
+    CCAA_d == "CN" ~ 97.73,
+    CCAA_d == "CB" ~ 101.82,
+    CCAA_d == "CL" ~ 98.93,
+    CCAA_d == "CM" ~ 100.33,
+    CCAA_d == "CT" ~ 100.34,
+    CCAA_d == "VC" ~ 101.03,
+    CCAA_d == "EX" ~ 98.47,
+    CCAA_d == "GA" ~ 96.87,
+    CCAA_d == "MD" ~ 100.95,
+    CCAA_d == "MC" ~ 99.10,
+    CCAA_d == "NC" ~ 104.95,
+    CCAA_d == "PV" ~ 102.11,
+    CCAA_d == "RI" ~ 103.68,
+    TRUE ~ ampi_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+```
+
+
+# 2011
+```{r}
+library(readxl)
+datos_2011 <- read_excel("C:/Users/Usuario/Desktop/tfg/DATOS.xlsx", sheet = "2011")
+
+library(dplyr)
+
+#POBLACION
+datos_2011 <- datos_2011 %>%
+  mutate(poblacion_o = case_when(
+    CCAA_o == "AN" ~ 8332087,
+    CCAA_o == "AR" ~ 1344396,
+    CCAA_o == "AS" ~ 1075877,
+    CCAA_o == "IB" ~ 1091656,
+    CCAA_o == "CN" ~ 2064876,
+    CCAA_o == "CB" ~ 590874,
+    CCAA_o == "CL" ~ 2545286,
+    CCAA_o == "CM" ~ 2099057,
+    CCAA_o == "CT" ~ 7493252,
+    CCAA_o == "VC" ~ 4999211,
+    CCAA_o == "EX" ~ 1102300,
+    CCAA_o == "GA" ~ 2773415,
+    CCAA_o == "MD" ~ 6394239,
+    CCAA_o == "MC" ~ 1459076,
+    CCAA_o == "NC" ~ 637099,
+    CCAA_o == "PV" ~ 2183134,
+    CCAA_o == "RI" ~ 320850,
+    TRUE ~ poblacion_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2011 <- datos_2011 %>%
+  mutate(poblacion_d = case_when(
+    CCAA_d == "AN" ~ 8332087,
+    CCAA_d == "AR" ~ 1344396,
+    CCAA_d == "AS" ~ 1075877,
+    CCAA_d == "IB" ~ 1091656,
+    CCAA_d == "CN" ~ 2064876,
+    CCAA_d == "CB" ~ 590874,
+    CCAA_d == "CL" ~ 2545286,
+    CCAA_d == "CM" ~ 2099057,
+    CCAA_d == "CT" ~ 7493252,
+    CCAA_d == "VC" ~ 4999211,
+    CCAA_d == "EX" ~ 1102300,
+    CCAA_d == "GA" ~ 2773415,
+    CCAA_d == "MD" ~ 6394239,
+    CCAA_d == "MC" ~ 1459076,
+    CCAA_d == "NC" ~ 637099,
+    CCAA_d == "PV" ~ 2183134,
+    CCAA_d == "RI" ~ 320850,
+    TRUE ~ poblacion_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#PIB
+
+datos_2011 <- datos_2011 %>%
+  mutate(pib_o = case_when(
+  CCAA_o == "AN" ~ 143389086,
+  CCAA_o == "AR" ~ 33368344,
+  CCAA_o == "AS" ~ 22375426,
+  CCAA_o == "IB" ~ 26398144,
+  CCAA_o == "CN" ~ 40595330,
+  CCAA_o == "CB" ~ 12622706,
+  CCAA_o == "CL" ~ 54575008,
+  CCAA_o == "CM" ~ 38258606,
+  CCAA_o == "CT" ~ 198906023,
+  CCAA_o == "VC" ~ 99706759,
+  CCAA_o == "EX" ~ 17738058,
+  CCAA_o == "GA" ~ 55767991,
+  CCAA_o == "MD" ~ 198465261,
+  CCAA_o == "MC" ~ 27236069,
+  CCAA_o == "NC" ~ 17942160,
+  CCAA_o == "PV" ~ 64130843,
+  CCAA_o == "RI" ~ 7907440,
+  TRUE ~ pib_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2011 <- datos_2011 %>%
+  mutate(pib_d = case_when(
+  CCAA_d == "AN" ~ 143389086,
+  CCAA_d == "AR" ~ 33368344,
+  CCAA_d == "AS" ~ 22375426,
+  CCAA_d == "IB" ~ 26398144,
+  CCAA_d == "CN" ~ 40595330,
+  CCAA_d == "CB" ~ 12622706,
+  CCAA_d == "CL" ~ 54575008,
+  CCAA_d == "CM" ~ 38258606,
+  CCAA_d == "CT" ~ 198906023,
+  CCAA_d == "VC" ~ 99706759,
+  CCAA_d == "EX" ~ 17738058,
+  CCAA_d == "GA" ~ 55767991,
+  CCAA_d == "MD" ~ 198465261,
+  CCAA_d == "MC" ~ 27236069,
+  CCAA_d == "NC" ~ 17942160,
+  CCAA_d == "PV" ~ 64130843,
+  CCAA_d == "RI" ~ 7907440,
+  TRUE ~ pib_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#VIVIENDA
+datos_2011 <- datos_2011 %>%
+  mutate(vivienda_o = case_when(
+    CCAA_o == "AN" ~ 120.476,
+    CCAA_o == "AR" ~ 135.826,
+    CCAA_o == "AS" ~ 134.027,
+    CCAA_o == "IB" ~ 116.98,
+    CCAA_o == "CN" ~ 123.61,
+    CCAA_o == "CB" ~ 122.397,
+    CCAA_o == "CL" ~ 135.8,
+    CCAA_o == "CM" ~ 133.946,
+    CCAA_o == "CT" ~ 126.522,
+    CCAA_o == "VC" ~ 123.154,
+    CCAA_o == "EX" ~ 130.763,
+    CCAA_o == "GA" ~ 129.103,
+    CCAA_o == "MD" ~ 122.826,
+    CCAA_o == "MC" ~ 130.497,
+    CCAA_o == "NC" ~ 139.463,
+    CCAA_o == "PV" ~ 127.966,
+    CCAA_o == "RI" ~ 137.909,
+    TRUE ~ vivienda_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2011 <- datos_2011 %>%
+  mutate(vivienda_d = case_when(
+    CCAA_d == "AN" ~ 120.476,
+    CCAA_d == "AR" ~ 135.826,
+    CCAA_d == "AS" ~ 134.027,
+    CCAA_d == "IB" ~ 116.98,
+    CCAA_d == "CN" ~ 123.61,
+    CCAA_d == "CB" ~ 122.397,
+    CCAA_d == "CL" ~ 135.8,
+    CCAA_d == "CM" ~ 133.946,
+    CCAA_d == "CT" ~ 126.522,
+    CCAA_d == "VC" ~ 123.154,
+    CCAA_d == "EX" ~ 130.763,
+    CCAA_d == "GA" ~ 129.103,
+    CCAA_d == "MD" ~ 122.826,
+    CCAA_d == "MC" ~ 130.497,
+    CCAA_d == "NC" ~ 139.463,
+    CCAA_d == "PV" ~ 127.966,
+    CCAA_d == "RI" ~ 137.909,
+    TRUE ~ vivienda_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#DESEMPLEO
+datos_2011 <- datos_2011 %>%
+  mutate(tasa_desempleo_o = case_when(
+    CCAA_o == "AN" ~ 30.13,
+    CCAA_o == "AR" ~ 17.07,
+    CCAA_o == "AS" ~ 17.84,
+    CCAA_o == "IB" ~ 21.86,
+    CCAA_o == "CN" ~ 29.28,
+    CCAA_o == "CB" ~ 15.29,
+    CCAA_o == "CL" ~ 16.86,
+    CCAA_o == "CM" ~ 23.08,
+    CCAA_o == "CT" ~ 19.16,
+    CCAA_o == "VC" ~ 23.99,
+    CCAA_o == "EX" ~ 25.08,
+    CCAA_o == "GA" ~ 17.26,
+    CCAA_o == "MD" ~ 16.33,
+    CCAA_o == "MC" ~ 24.99,
+    CCAA_o == "NC" ~ 12.99,
+    CCAA_o == "PV" ~ 12.35,
+    CCAA_o == "RI" ~ 17.21,
+    TRUE ~ tasa_desempleo_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2011 <- datos_2011 %>%
+  mutate(tasa_desempleo_d = case_when(
+    CCAA_d == "AN" ~ 30.13,
+    CCAA_d == "AR" ~ 17.07,
+    CCAA_d == "AS" ~ 17.84,
+    CCAA_d == "IB" ~ 21.86,
+    CCAA_d == "CN" ~ 29.28,
+    CCAA_d == "CB" ~ 15.29,
+    CCAA_d == "CL" ~ 16.86,
+    CCAA_d == "CM" ~ 23.08,
+    CCAA_d == "CT" ~ 19.16,
+    CCAA_d == "VC" ~ 23.99,
+    CCAA_d == "EX" ~ 25.08,
+    CCAA_d == "GA" ~ 17.26,
+    CCAA_d == "MD" ~ 16.33,
+    CCAA_d == "MC" ~ 24.99,
+    CCAA_d == "NC" ~ 12.99,
+    CCAA_d == "PV" ~ 12.35,
+    CCAA_d == "RI" ~ 17.21,
+    TRUE ~ tasa_desempleo_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#AMPI
+datos_2011 <- datos_2011 %>%
+  mutate(ampi_o = case_when(
+    CCAA_o == "AN" ~ 97.51,
+    CCAA_o == "AR" ~ 102.90,
+    CCAA_o == "AS" ~ 102.83,
+    CCAA_o == "IB" ~ 101.38,
+    CCAA_o == "CN" ~ 97.76,
+    CCAA_o == "CB" ~ 101.88,
+    CCAA_o == "CL" ~ 99.17,
+    CCAA_o == "CM" ~ 100.61,
+    CCAA_o == "CT" ~ 100.86,
+    CCAA_o == "VC" ~ 101.50,
+    CCAA_o == "EX" ~ 99.08,
+    CCAA_o == "GA" ~ 96.96,
+    CCAA_o == "MD" ~ 101.24,
+    CCAA_o == "MC" ~ 99.99,
+    CCAA_o == "NC" ~ 105.07,
+    CCAA_o == "PV" ~ 101.94,
+    CCAA_o == "RI" ~ 102.89,
+    TRUE ~ ampi_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2011 <- datos_2011 %>%
+  mutate(ampi_d = case_when(
+    CCAA_d == "AN" ~ 97.51,
+    CCAA_d == "AR" ~ 102.90,
+    CCAA_d == "AS" ~ 102.83,
+    CCAA_d == "IB" ~ 101.38,
+    CCAA_d == "CN" ~ 97.76,
+    CCAA_d == "CB" ~ 101.88,
+    CCAA_d == "CL" ~ 99.17,
+    CCAA_d == "CM" ~ 100.61,
+    CCAA_d == "CT" ~ 100.86,
+    CCAA_d == "VC" ~ 101.50,
+    CCAA_d == "EX" ~ 99.08,
+    CCAA_d == "GA" ~ 96.96,
+    CCAA_d == "MD" ~ 101.24,
+    CCAA_d == "MC" ~ 99.99,
+    CCAA_d == "NC" ~ 105.07,
+    CCAA_d == "PV" ~ 101.94,
+    CCAA_d == "RI" ~ 102.89,
+    TRUE ~ ampi_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+```
+
+
+# 2012
+```{r}
+library(readxl)
+datos_2012 <- read_excel("C:/Users/Usuario/Desktop/tfg/DATOS.xlsx", sheet = "2012")
+
+library(dplyr)
+
+
+#POBLACION
+datos_2012 <- datos_2012 %>%
+  mutate(poblacion_o = case_when(
+    CCAA_o == "AN" ~ 8377809,
+    CCAA_o == "AR" ~ 1343790,
+    CCAA_o == "AS" ~ 1074304,
+    CCAA_o == "IB" ~ 1100715,
+    CCAA_o == "CN" ~ 2085928,
+    CCAA_o == "CB" ~ 592387,
+    CCAA_o == "CL" ~ 2537654,
+    CCAA_o == "CM" ~ 2105936,
+    CCAA_o == "CT" ~ 7514992,
+    CCAA_o == "VC" ~ 5009647,
+    CCAA_o == "EX" ~ 1104343,
+    CCAA_o == "GA" ~ 2771916,
+    CCAA_o == "MD" ~ 6425573,
+    CCAA_o == "MC" ~ 1461928,
+    CCAA_o == "NC" ~ 640023,
+    CCAA_o == "PV" ~ 2184696,
+    CCAA_o == "RI" ~ 320951,
+    TRUE ~ poblacion_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2012 <- datos_2012 %>%
+  mutate(poblacion_d = case_when(
+    CCAA_d == "AN" ~ 8377809,
+    CCAA_d == "AR" ~ 1343790,
+    CCAA_d == "AS" ~ 1074304,
+    CCAA_d == "IB" ~ 1100715,
+    CCAA_d == "CN" ~ 2085928,
+    CCAA_d == "CB" ~ 592387,
+    CCAA_d == "CL" ~ 2537654,
+    CCAA_d == "CM" ~ 2105936,
+    CCAA_d == "CT" ~ 7514992,
+    CCAA_d == "VC" ~ 5009647,
+    CCAA_d == "EX" ~ 1104343,
+    CCAA_d == "GA" ~ 2771916,
+    CCAA_d == "MD" ~ 6425573,
+    CCAA_d == "MC" ~ 1461928,
+    CCAA_d == "NC" ~ 640023,
+    CCAA_d == "PV" ~ 2184696,
+    CCAA_d == "RI" ~ 320951,
+    TRUE ~ poblacion_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#PIB 
+datos_2012 <- datos_2012 %>%
+  mutate(pib_o = case_when(
+    CCAA_o == "AN" ~ 137997226,
+    CCAA_o == "AR" ~ 31961110,
+    CCAA_o == "AS" ~ 21363404,
+    CCAA_o == "IB" ~ 25977106,
+    CCAA_o == "CN" ~ 39202014,
+    CCAA_o == "CB" ~ 12166392,
+    CCAA_o == "CL" ~ 52865370,
+    CCAA_o == "CM" ~ 36888035,
+    CCAA_o == "CT" ~ 193435953,
+    CCAA_o == "VC" ~ 95170430,
+    CCAA_o == "EX" ~ 17064000,
+    CCAA_o == "GA" ~ 53968833,
+    CCAA_o == "MD" ~ 195087646,
+    CCAA_o == "MC" ~ 26507201,
+    CCAA_o == "NC" ~ 17281353,
+    CCAA_o == "PV" ~ 62555081,
+    CCAA_o == "RI" ~ 7635778,
+    TRUE ~ pib_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+
+datos_2012 <- datos_2012 %>%
+  mutate(pib_d = case_when(
+    CCAA_d == "AN" ~ 137997226,
+    CCAA_d == "AR" ~ 31961110,
+    CCAA_d == "AS" ~ 21363404,
+    CCAA_d == "IB" ~ 25977106,
+    CCAA_d == "CN" ~ 39202014,
+    CCAA_d == "CB" ~ 12166392,
+    CCAA_d == "CL" ~ 52865370,
+    CCAA_d == "CM" ~ 36888035,
+    CCAA_d == "CT" ~ 193435953,
+    CCAA_d == "VC" ~ 95170430,
+    CCAA_d == "EX" ~ 17064000,
+    CCAA_d == "GA" ~ 53968833,
+    CCAA_d == "MD" ~ 195087646,
+    CCAA_d == "MC" ~ 26507201,
+    CCAA_d == "NC" ~ 17281353,
+    CCAA_d == "PV" ~ 62555081,
+    CCAA_d == "RI" ~ 7635778,
+    TRUE ~ pib_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#VIVIENDA
+datos_2012 <- datos_2012 %>%
+  mutate(vivienda_o = case_when(
+    CCAA_o == "AN" ~ 106.267,
+    CCAA_o == "AR" ~ 116.262,
+    CCAA_o == "AS" ~ 114.537,
+    CCAA_o == "IB" ~ 100.789,
+    CCAA_o == "CN" ~ 107.173,
+    CCAA_o == "CB" ~ 105.107,
+    CCAA_o == "CL" ~ 117.855,
+    CCAA_o == "CM" ~ 118.443,
+    CCAA_o == "CT" ~ 106.514,
+    CCAA_o == "VC" ~ 106.444,
+    CCAA_o == "EX" ~ 120.066,
+    CCAA_o == "GA" ~ 112.385,
+    CCAA_o == "MD" ~ 103.984,
+    CCAA_o == "MC" ~ 115.925,
+    CCAA_o == "NC" ~ 119.902,
+    CCAA_o == "PV" ~ 108.614,
+    CCAA_o == "RI" ~ 117.833,
+    TRUE ~ vivienda_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2012 <- datos_2012 %>%
+  mutate(vivienda_d = case_when(
+    CCAA_d == "AN" ~ 106.267,
+    CCAA_d == "AR" ~ 116.262,
+    CCAA_d == "AS" ~ 114.537,
+    CCAA_d == "IB" ~ 100.789,
+    CCAA_d == "CN" ~ 107.173,
+    CCAA_d == "CB" ~ 105.107,
+    CCAA_d == "CL" ~ 117.855,
+    CCAA_d == "CM" ~ 118.443,
+    CCAA_d == "CT" ~ 106.514,
+    CCAA_d == "VC" ~ 106.444,
+    CCAA_d == "EX" ~ 120.066,
+    CCAA_d == "GA" ~ 112.385,
+    CCAA_d == "MD" ~ 103.984,
+    CCAA_d == "MC" ~ 115.925,
+    CCAA_d == "NC" ~ 119.902,
+    CCAA_d == "PV" ~ 108.614,
+    CCAA_d == "RI" ~ 117.833,
+    TRUE ~ vivienda_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#DESEMPLEO
+datos_2012 <- datos_2012 %>%
+  mutate(tasa_desempleo_o = case_when(
+    CCAA_o == "AN" ~ 34.35,
+    CCAA_o == "AR" ~ 18.67,
+    CCAA_o == "AS" ~ 21.83,
+    CCAA_o == "IB" ~ 23.17,
+    CCAA_o == "CN" ~ 32.58,
+    CCAA_o == "CB" ~ 17.8,
+    CCAA_o == "CL" ~ 19.8,
+    CCAA_o == "CM" ~ 28.58,
+    CCAA_o == "CT" ~ 22.51,
+    CCAA_o == "VC" ~ 27.19,
+    CCAA_o == "EX" ~ 33.08,
+    CCAA_o == "GA" ~ 20.53,
+    CCAA_o == "MD" ~ 18.53,
+    CCAA_o == "MC" ~ 27.61,
+    CCAA_o == "NC" ~ 16.16,
+    CCAA_o == "PV" ~ 15.6,
+    CCAA_o == "RI" ~ 20.58,
+    TRUE ~ tasa_desempleo_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2012 <- datos_2012 %>%
+  mutate(tasa_desempleo_d = case_when(
+    CCAA_d == "AN" ~ 34.35,
+    CCAA_d == "AR" ~ 18.67,
+    CCAA_d == "AS" ~ 21.83,
+    CCAA_d == "IB" ~ 23.17,
+    CCAA_d == "CN" ~ 32.58,
+    CCAA_d == "CB" ~ 17.8,
+    CCAA_d == "CL" ~ 19.8,
+    CCAA_d == "CM" ~ 28.58,
+    CCAA_d == "CT" ~ 22.51,
+    CCAA_d == "VC" ~ 27.19,
+    CCAA_d == "EX" ~ 33.08,
+    CCAA_d == "GA" ~ 20.53,
+    CCAA_d == "MD" ~ 18.53,
+    CCAA_d == "MC" ~ 27.61,
+    CCAA_d == "NC" ~ 16.16,
+    CCAA_d == "PV" ~ 15.6,
+    CCAA_d == "RI" ~ 20.58,
+    TRUE ~ tasa_desempleo_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#AMPI
+datos_2012 <- datos_2012 %>%
+  mutate(ampi_o = case_when(
+    CCAA_o == "AN" ~ 97.65,
+    CCAA_o == "AR" ~ 103.21,
+    CCAA_o == "AS" ~ 103.46,
+    CCAA_o == "IB" ~ 101.87,
+    CCAA_o == "CN" ~ 97.37,
+    CCAA_o == "CB" ~ 102.28,
+    CCAA_o == "CL" ~ 99.34,
+    CCAA_o == "CM" ~ 100.38,
+    CCAA_o == "CT" ~ 100.48,
+    CCAA_o == "VC" ~ 101.22,
+    CCAA_o == "EX" ~ 98.85,
+    CCAA_o == "GA" ~ 96.67,
+    CCAA_o == "MD" ~ 101.36,
+    CCAA_o == "MC" ~ 99.44,
+    CCAA_o == "NC" ~ 105.10,
+    CCAA_o == "PV" ~ 102.23,
+    CCAA_o == "RI" ~ 103.39,
+    TRUE ~ ampi_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2012 <- datos_2012 %>%
+  mutate(ampi_d = case_when(
+    CCAA_d == "AN" ~ 97.65,
+    CCAA_d == "AR" ~ 103.21,
+    CCAA_d == "AS" ~ 103.46,
+    CCAA_d == "IB" ~ 101.87,
+    CCAA_d == "CN" ~ 97.37,
+    CCAA_d == "CB" ~ 102.28,
+    CCAA_d == "CL" ~ 99.34,
+    CCAA_d == "CM" ~ 100.38,
+    CCAA_d == "CT" ~ 100.48,
+    CCAA_d == "VC" ~ 101.22,
+    CCAA_d == "EX" ~ 98.85,
+    CCAA_d == "GA" ~ 96.67,
+    CCAA_d == "MD" ~ 101.36,
+    CCAA_d == "MC" ~ 99.44,
+    CCAA_d == "NC" ~ 105.10,
+    CCAA_d == "PV" ~ 102.23,
+    CCAA_d == "RI" ~ 103.39,
+    TRUE ~ ampi_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+```
+
+
+# 2013
+```{r}
+library(readxl)
+datos_2013 <- read_excel("C:/Users/Usuario/Desktop/tfg/DATOS.xlsx", sheet = "2013")
+
+library(dplyr)
+
+#POBLACION 
+datos_2013 <- datos_2013 %>%
+  mutate(poblacion_o = case_when(
+    CCAA_o == "AN" ~ 8387986,
+    CCAA_o == "AR" ~ 1337675,
+    CCAA_o == "AS" ~ 1067425,
+    CCAA_o == "IB" ~ 1105131,
+    CCAA_o == "CN" ~ 2096336,
+    CCAA_o == "CB" ~ 589789,
+    CCAA_o == "CL" ~ 2516927,
+    CCAA_o == "CM" ~ 2093474,
+    CCAA_o == "CT" ~ 7488664,
+    CCAA_o == "VC" ~ 4988365,
+    CCAA_o == "EX" ~ 1101024,
+    CCAA_o == "GA" ~ 2760720,
+    CCAA_o == "MD" ~ 6411525,
+    CCAA_o == "MC" ~ 1462271,
+    CCAA_o == "NC" ~ 639089,
+    CCAA_o == "PV" ~ 2179274,
+    CCAA_o == "RI" ~ 318819,
+    TRUE ~ poblacion_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2013 <- datos_2013 %>%
+  mutate(poblacion_d = case_when(
+    CCAA_d == "AN" ~ 8387986,
+    CCAA_d == "AR" ~ 1337675,
+    CCAA_d == "AS" ~ 1067425,
+    CCAA_d == "IB" ~ 1105131,
+    CCAA_d == "CN" ~ 2096336,
+    CCAA_d == "CB" ~ 589789,
+    CCAA_d == "CL" ~ 2516927,
+    CCAA_d == "CM" ~ 2093474,
+    CCAA_d == "CT" ~ 7488664,
+    CCAA_d == "VC" ~ 4988365,
+    CCAA_d == "EX" ~ 1101024,
+    CCAA_d == "GA" ~ 2760720,
+    CCAA_d == "MD" ~ 6411525,
+    CCAA_d == "MC" ~ 1462271,
+    CCAA_d == "NC" ~ 639089,
+    CCAA_d == "PV" ~ 2179274,
+    CCAA_d == "RI" ~ 318819,
+    TRUE ~ poblacion_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#PIB
+
+datos_2013 <- datos_2013 %>%
+  mutate(pib_o = case_when(
+    CCAA_o == "AN" ~ 136208211,
+    CCAA_o == "AR" ~ 32111169,
+    CCAA_o == "AS" ~ 20768558,
+    CCAA_o == "IB" ~ 25967649,
+    CCAA_o == "CN" ~ 39073985,
+    CCAA_o == "CB" ~ 11878603,
+    CCAA_o == "CL" ~ 51551365,
+    CCAA_o == "CM" ~ 36187562,
+    CCAA_o == "CT" ~ 192183225,
+    CCAA_o == "VC" ~ 94418327,
+    CCAA_o == "EX" ~ 17075331,
+    CCAA_o == "GA" ~ 53967113,
+    CCAA_o == "MD" ~ 192126161,
+    CCAA_o == "MC" ~ 26590483,
+    CCAA_o == "NC" ~ 17248361,
+    CCAA_o == "PV" ~ 61675327,
+    CCAA_o == "RI" ~ 7545582,
+    TRUE ~ pib_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2013 <- datos_2013 %>%
+  mutate(pib_d = case_when(
+    CCAA_d == "AN" ~ 136208211,
+    CCAA_d == "AR" ~ 32111169,
+    CCAA_d == "AS" ~ 20768558,
+    CCAA_d == "IB" ~ 25967649,
+    CCAA_d == "CN" ~ 39073985,
+    CCAA_d == "CB" ~ 11878603,
+    CCAA_d == "CL" ~ 51551365,
+    CCAA_d == "CM" ~ 36187562,
+    CCAA_d == "CT" ~ 192183225,
+    CCAA_d == "VC" ~ 94418327,
+    CCAA_d == "EX" ~ 17075331,
+    CCAA_d == "GA" ~ 53967113,
+    CCAA_d == "MD" ~ 192126161,
+    CCAA_d == "MC" ~ 26590483,
+    CCAA_d == "NC" ~ 17248361,
+    CCAA_d == "PV" ~ 61675327,
+    CCAA_d == "RI" ~ 7545582,
+    TRUE ~ pib_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#VIVIENDA
+datos_2013 <- datos_2013 %>%
+  mutate(vivienda_o = case_when(
+    CCAA_o == "AN" ~ 96.923,
+    CCAA_o == "AR" ~ 101.492,
+    CCAA_o == "AS" ~ 100.763,
+    CCAA_o == "IB" ~ 93.581,
+    CCAA_o == "CN" ~ 97.953,
+    CCAA_o == "CB" ~ 95.561,
+    CCAA_o == "CL" ~ 101.215,
+    CCAA_o == "CM" ~ 100.52,
+    CCAA_o == "CT" ~ 94.337,
+    CCAA_o == "VC" ~ 96.84,
+    CCAA_o == "EX" ~ 102.356,
+    CCAA_o == "GA" ~ 99.834,
+    CCAA_o == "MD" ~ 92.203,
+    CCAA_o == "MC" ~ 98.18,
+    CCAA_o == "NC" ~ 106.285,
+    CCAA_o == "PV" ~ 99.535,
+    CCAA_o == "RI" ~ 101.723,
+    TRUE ~ vivienda_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2013 <- datos_2013 %>%
+  mutate(vivienda_d = case_when(
+    CCAA_d == "AN" ~ 96.923,
+    CCAA_d == "AR" ~ 101.492,
+    CCAA_d == "AS" ~ 100.763,
+    CCAA_d == "IB" ~ 93.581,
+    CCAA_d == "CN" ~ 97.953,
+    CCAA_d == "CB" ~ 95.561,
+    CCAA_d == "CL" ~ 101.215,
+    CCAA_d == "CM" ~ 100.52,
+    CCAA_d == "CT" ~ 94.337,
+    CCAA_d == "VC" ~ 96.84,
+    CCAA_d == "EX" ~ 102.356,
+    CCAA_d == "GA" ~ 99.834,
+    CCAA_d == "MD" ~ 92.203,
+    CCAA_d == "MC" ~ 98.18,
+    CCAA_d == "NC" ~ 106.285,
+    CCAA_d == "PV" ~ 99.535,
+    CCAA_d == "RI" ~ 101.723,
+    TRUE ~ vivienda_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#DESEMPLEO
+datos_2013 <- datos_2013 %>%
+  mutate(tasa_desempleo_o = case_when(
+    CCAA_o == "AN" ~ 36.22,
+    CCAA_o == "AR" ~ 21.39,
+    CCAA_o == "AS" ~ 24.13,
+    CCAA_o == "IB" ~ 22.26,
+    CCAA_o == "CN" ~ 33.73,
+    CCAA_o == "CB" ~ 20.44,
+    CCAA_o == "CL" ~ 21.75,
+    CCAA_o == "CM" ~ 29.97,
+    CCAA_o == "CT" ~ 23.12,
+    CCAA_o == "VC" ~ 28.05,
+    CCAA_o == "EX" ~ 33.87,
+    CCAA_o == "GA" ~ 22.04,
+    CCAA_o == "MD" ~ 19.76,
+    CCAA_o == "MC" ~ 28.98,
+    CCAA_o == "NC" ~ 17.93,
+    CCAA_o == "PV" ~ 16.58,
+    CCAA_o == "RI" ~ 20.04,
+    TRUE ~ tasa_desempleo_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2013 <- datos_2013 %>%
+  mutate(tasa_desempleo_d = case_when(
+    CCAA_d == "AN" ~ 36.22,
+    CCAA_d == "AR" ~ 21.39,
+    CCAA_d == "AS" ~ 24.13,
+    CCAA_d == "IB" ~ 22.26,
+    CCAA_d == "CN" ~ 33.73,
+    CCAA_d == "CB" ~ 20.44,
+    CCAA_d == "CL" ~ 21.75,
+    CCAA_d == "CM" ~ 29.97,
+    CCAA_d == "CT" ~ 23.12,
+    CCAA_d == "VC" ~ 28.05,
+    CCAA_d == "EX" ~ 33.87,
+    CCAA_d == "GA" ~ 22.04,
+    CCAA_d == "MD" ~ 19.76,
+    CCAA_d == "MC" ~ 28.98,
+    CCAA_d == "NC" ~ 17.93,
+    CCAA_d == "PV" ~ 16.58,
+    CCAA_d == "RI" ~ 20.04,
+    TRUE ~ tasa_desempleo_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#AMPI
+datos_2013 <- datos_2013 %>%
+  mutate(ampi_o = case_when(
+    CCAA_o == "AN" ~ 97.59,
+    CCAA_o == "AR" ~ 102.18,
+    CCAA_o == "AS" ~ 102.59,
+    CCAA_o == "IB" ~ 101.25,
+    CCAA_o == "CN" ~ 97.27,
+    CCAA_o == "CB" ~ 101.95,
+    CCAA_o == "CL" ~ 99.43,
+    CCAA_o == "CM" ~ 100.14,
+    CCAA_o == "CT" ~ 100.68,
+    CCAA_o == "VC" ~ 101.33,
+    CCAA_o == "EX" ~ 98.02,
+    CCAA_o == "GA" ~ 96.65,
+    CCAA_o == "MD" ~ 100.77,
+    CCAA_o == "MC" ~ 99.35,
+    CCAA_o == "NC" ~ 105.08,
+    CCAA_o == "PV" ~ 101.92,
+    CCAA_o == "RI" ~ 103.58,
+    TRUE ~ ampi_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2013 <- datos_2013 %>%
+  mutate(ampi_d = case_when(
+    CCAA_d == "AN" ~ 97.59,
+    CCAA_d == "AR" ~ 102.18,
+    CCAA_d == "AS" ~ 102.59,
+    CCAA_d == "IB" ~ 101.25,
+    CCAA_d == "CN" ~ 97.27,
+    CCAA_d == "CB" ~ 101.95,
+    CCAA_d == "CL" ~ 99.43,
+    CCAA_d == "CM" ~ 100.14,
+    CCAA_d == "CT" ~ 100.68,
+    CCAA_d == "VC" ~ 101.33,
+    CCAA_d == "EX" ~ 98.02,
+    CCAA_d == "GA" ~ 96.65,
+    CCAA_d == "MD" ~ 100.77,
+    CCAA_d == "MC" ~ 99.35,
+    CCAA_d == "NC" ~ 105.08,
+    CCAA_d == "PV" ~ 101.92,
+    CCAA_d == "RI" ~ 103.58,
+    TRUE ~ ampi_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+```
+
+
+# 2014
+```{r}
+library(readxl)
+datos_2014 <- read_excel("C:/Users/Usuario/Desktop/tfg/DATOS.xlsx", sheet = "2014")
+
+library(dplyr)
+
+
+#POBLACION
+datos_2014 <- datos_2014 %>%
+  mutate(poblacion_o = case_when(
+    CCAA_o == "AN" ~ 8381239,
+    CCAA_o == "AR" ~ 1330713,
+    CCAA_o == "AS" ~ 1058560,
+    CCAA_o == "IB" ~ 1106617,
+    CCAA_o == "CN" ~ 2098155,
+    CCAA_o == "CB" ~ 587491,
+    CCAA_o == "CL" ~ 2493604,
+    CCAA_o == "CM" ~ 2074760,
+    CCAA_o == "CT" ~ 7432833,
+    CCAA_o == "VC" ~ 4960213,
+    CCAA_o == "EX" ~ 1096708,
+    CCAA_o == "GA" ~ 2745817,
+    CCAA_o == "MD" ~ 6372553,
+    CCAA_o == "MC" ~ 1462734,
+    CCAA_o == "NC" ~ 637099,
+    CCAA_o == "PV" ~ 2172247,
+    CCAA_o == "RI" ~ 315736,
+    TRUE ~ poblacion_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2014 <- datos_2014 %>%
+  mutate(poblacion_d = case_when(
+    CCAA_d == "AN" ~ 8381239,
+    CCAA_d == "AR" ~ 1330713,
+    CCAA_d == "AS" ~ 1058560,
+    CCAA_d == "IB" ~ 1106617,
+    CCAA_d == "CN" ~ 2098155,
+    CCAA_d == "CB" ~ 587491,
+    CCAA_d == "CL" ~ 2493604,
+    CCAA_d == "CM" ~ 2074760,
+    CCAA_d == "CT" ~ 7432833,
+    CCAA_d == "VC" ~ 4960213,
+    CCAA_d == "EX" ~ 1096708,
+    CCAA_d == "GA" ~ 2745817,
+    CCAA_d == "MD" ~ 6372553,
+    CCAA_d == "MC" ~ 1462734,
+    CCAA_d == "NC" ~ 637099,
+    CCAA_d == "PV" ~ 2172247,
+    CCAA_d == "RI" ~ 315736,
+    TRUE ~ poblacion_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#PIB
+datos_2014 <- datos_2014 %>%
+  mutate(pib_o = case_when(
+    CCAA_o == "AN" ~ 137908774,
+    CCAA_o == "AR" ~ 32322648,
+    CCAA_o == "AS" ~ 20679373,
+    CCAA_o == "IB" ~ 26811771,
+    CCAA_o == "CN" ~ 39315077,
+    CCAA_o == "CB" ~ 12074783,
+    CCAA_o == "CL" ~ 51595931,
+    CCAA_o == "CM" ~ 35394282,
+    CCAA_o == "CT" ~ 195575054,
+    CCAA_o == "VC" ~ 96446545,
+    CCAA_o == "EX" ~ 17045460,
+    CCAA_o == "GA" ~ 54240789,
+    CCAA_o == "MD" ~ 194443952,
+    CCAA_o == "MC" ~ 26740315,
+    CCAA_o == "NC" ~ 17518122,
+    CCAA_o == "PV" ~ 62737292,
+    CCAA_o == "RI" ~ 7693499,
+    TRUE ~ pib_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2014 <- datos_2014 %>%
+  mutate(pib_d = case_when(
+    CCAA_d == "AN" ~ 137908774,
+    CCAA_d == "AR" ~ 32322648,
+    CCAA_d == "AS" ~ 20679373,
+    CCAA_d == "IB" ~ 26811771,
+    CCAA_d == "CN" ~ 39315077,
+    CCAA_d == "CB" ~ 12074783,
+    CCAA_d == "CL" ~ 51595931,
+    CCAA_d == "CM" ~ 35394282,
+    CCAA_d == "CT" ~ 195575054,
+    CCAA_d == "VC" ~ 96446545,
+    CCAA_d == "EX" ~ 17045460,
+    CCAA_d == "GA" ~ 54240789,
+    CCAA_d == "MD" ~ 194443952,
+    CCAA_d == "MC" ~ 26740315,
+    CCAA_d == "NC" ~ 17518122,
+    CCAA_d == "PV" ~ 62737292,
+    CCAA_d == "RI" ~ 7693499,
+    TRUE ~ pib_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#VIVIENDA
+
+datos_2014 <- datos_2014 %>%
+  mutate(vivienda_o = case_when(
+    CCAA_o == "AN" ~ 97.077,
+    CCAA_o == "AR" ~ 99.157,
+    CCAA_o == "AS" ~ 98.510,
+    CCAA_o == "IB" ~ 93.987,
+    CCAA_o == "CN" ~ 96.711,
+    CCAA_o == "CB" ~ 97.211,
+    CCAA_o == "CL" ~ 98.774,
+    CCAA_o == "CM" ~ 97.846,
+    CCAA_o == "CT" ~ 95.396,
+    CCAA_o == "VC" ~ 97.659,
+    CCAA_o == "EX" ~ 98.126,
+    CCAA_o == "GA" ~ 98.655,
+    CCAA_o == "MD" ~ 94.572,
+    CCAA_o == "MC" ~ 98.365,
+    CCAA_o == "NC" ~ 99.395,
+    CCAA_o == "PV" ~ 99.040,
+    CCAA_o == "RI" ~ 99.483,
+    TRUE ~ vivienda_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2014 <- datos_2014 %>%
+  mutate(vivienda_d = case_when(
+    CCAA_d == "AN" ~ 97.077,
+    CCAA_d == "AR" ~ 99.157,
+    CCAA_d == "AS" ~ 98.510,
+    CCAA_d == "IB" ~ 93.987,
+    CCAA_d == "CN" ~ 96.711,
+    CCAA_d == "CB" ~ 97.211,
+    CCAA_d == "CL" ~ 98.774,
+    CCAA_d == "CM" ~ 97.846,
+    CCAA_d == "CT" ~ 95.396,
+    CCAA_d == "VC" ~ 97.659,
+    CCAA_d == "EX" ~ 98.126,
+    CCAA_d == "GA" ~ 98.655,
+    CCAA_d == "MD" ~ 94.572,
+    CCAA_d == "MC" ~ 98.365,
+    CCAA_d == "NC" ~ 99.395,
+    CCAA_d == "PV" ~ 99.040,
+    CCAA_d == "RI" ~ 99.483,
+    TRUE ~ vivienda_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+
+#DESEMPLEO
+datos_2014 <- datos_2014 %>%
+  mutate(tasa_desempleo_o = case_when(
+    CCAA_o == "AN" ~ 34.78,
+    CCAA_o == "AR" ~ 20.17,
+    CCAA_o == "AS" ~ 21.13,
+    CCAA_o == "IB" ~ 20,
+    CCAA_o == "CN" ~ 32.41,
+    CCAA_o == "CB" ~ 19.42,
+    CCAA_o == "CL" ~ 20.77,
+    CCAA_o == "CM" ~ 29,
+    CCAA_o == "CT" ~ 20.33,
+    CCAA_o == "VC" ~ 25.82,
+    CCAA_o == "EX" ~ 29.79,
+    CCAA_o == "GA" ~ 21.65,
+    CCAA_o == "MD" ~ 18.74,
+    CCAA_o == "MC" ~ 26.59,
+    CCAA_o == "NC" ~ 15.71,
+    CCAA_o == "PV" ~ 16.33,
+    CCAA_o == "RI" ~ 18.16,
+    TRUE ~ tasa_desempleo_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2014 <- datos_2014 %>%
+  mutate(tasa_desempleo_d = case_when(
+    CCAA_d == "AN" ~ 34.78,
+    CCAA_d == "AR" ~ 20.17,
+    CCAA_d == "AS" ~ 21.13,
+    CCAA_d == "IB" ~ 20,
+    CCAA_d == "CN" ~ 32.41,
+    CCAA_d == "CB" ~ 19.42,
+    CCAA_d == "CL" ~ 20.77,
+    CCAA_d == "CM" ~ 29,
+    CCAA_d == "CT" ~ 20.33,
+    CCAA_d == "VC" ~ 25.82,
+    CCAA_d == "EX" ~ 29.79,
+    CCAA_d == "GA" ~ 21.65,
+    CCAA_d == "MD" ~ 18.74,
+    CCAA_d == "MC" ~ 26.59,
+    CCAA_d == "NC" ~ 15.71,
+    CCAA_d == "PV" ~ 16.33,
+    CCAA_d == "RI" ~ 18.16,
+    TRUE ~ tasa_desempleo_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#AMPI
+datos_2014 <- datos_2014 %>%
+  mutate(ampi_o = case_when(
+    CCAA_o == "AN" ~ 97.40,
+    CCAA_o == "AR" ~ 102.66,
+    CCAA_o == "AS" ~ 103.18,
+    CCAA_o == "IB" ~ 101.22,
+    CCAA_o == "CN" ~ 97.25,
+    CCAA_o == "CB" ~ 102.32,
+    CCAA_o == "CL" ~ 99.46,
+    CCAA_o == "CM" ~ 100.66,
+    CCAA_o == "CT" ~ 100.95,
+    CCAA_o == "VC" ~ 101.16,
+    CCAA_o == "EX" ~ 98.08,
+    CCAA_o == "GA" ~ 96.25,
+    CCAA_o == "MD" ~ 100.86,
+    CCAA_o == "MC" ~ 99.09,
+    CCAA_o == "NC" ~ 104.95,
+    CCAA_o == "PV" ~ 102.28,
+    CCAA_o == "RI" ~ 103.61,
+    TRUE ~ ampi_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2014 <- datos_2014 %>%
+  mutate(ampi_d = case_when(
+    CCAA_d == "AN" ~ 97.40,
+    CCAA_d == "AR" ~ 102.66,
+    CCAA_d == "AS" ~ 103.18,
+    CCAA_d == "IB" ~ 101.22,
+    CCAA_d == "CN" ~ 97.25,
+    CCAA_d == "CB" ~ 102.32,
+    CCAA_d == "CL" ~ 99.46,
+    CCAA_d == "CM" ~ 100.66,
+    CCAA_d == "CT" ~ 100.95,
+    CCAA_d == "VC" ~ 101.16,
+    CCAA_d == "EX" ~ 98.08,
+    CCAA_d == "GA" ~ 96.25,
+    CCAA_d == "MD" ~ 100.86,
+    CCAA_d == "MC" ~ 99.09,
+    CCAA_d == "NC" ~ 104.95,
+    CCAA_d == "PV" ~ 102.28,
+    CCAA_d == "RI" ~ 103.61,
+    TRUE ~ ampi_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+```
+
+
+# 2015
+```{r}
+library(readxl)
+datos_2015 <- read_excel("C:/Users/Usuario/Desktop/tfg/DATOS.xlsx", sheet = "2015")
+
+library(dplyr)
+
+#POBLACION
+datos_2015 <- datos_2015 %>%
+  mutate(poblacion_o = case_when(
+    CCAA_o == "AN" ~ 8388994,
+    CCAA_o == "AR" ~ 1325600,
+    CCAA_o == "AS" ~ 1049328,
+    CCAA_o == "IB" ~ 1111002,
+    CCAA_o == "CN" ~ 2101319,
+    CCAA_o == "CB" ~ 585184,
+    CCAA_o == "CL" ~ 2475697,
+    CCAA_o == "CM" ~ 2062615,
+    CCAA_o == "CT" ~ 7420890,
+    CCAA_o == "VC" ~ 4945092,
+    CCAA_o == "EX" ~ 1092217,
+    CCAA_o == "GA" ~ 2732801,
+    CCAA_o == "MD" ~ 6375737,
+    CCAA_o == "MC" ~ 1465195,
+    CCAA_o == "NC" ~ 637317,
+    CCAA_o == "PV" ~ 2172707,
+    CCAA_o == "RI" ~ 314457,
+    TRUE ~ poblacion_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2015 <- datos_2015 %>%
+  mutate(poblacion_d = case_when(
+    CCAA_d == "AN" ~ 8388994,
+    CCAA_d == "AR" ~ 1325600,
+    CCAA_d == "AS" ~ 1049328,
+    CCAA_d == "IB" ~ 1111002,
+    CCAA_d == "CN" ~ 2101319,
+    CCAA_d == "CB" ~ 585184,
+    CCAA_d == "CL" ~ 2475697,
+    CCAA_d == "CM" ~ 2062615,
+    CCAA_d == "CT" ~ 7420890,
+    CCAA_d == "VC" ~ 4945092,
+    CCAA_d == "EX" ~ 1092217,
+    CCAA_d == "GA" ~ 2732801,
+    CCAA_d == "MD" ~ 6375737,
+    CCAA_d == "MC" ~ 1465195,
+    CCAA_d == "NC" ~ 637317,
+    CCAA_d == "PV" ~ 2172707,
+    CCAA_d == "RI" ~ 314457,
+    TRUE ~ poblacion_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#PIB
+datos_2015 <- datos_2015 %>%
+  mutate(pib_o = case_when(
+    CCAA_o == "AN" ~ 144859000,
+    CCAA_o == "AR" ~ 32896878,
+    CCAA_o == "AS" ~ 21389062,
+    CCAA_o == "IB" ~ 28271040,
+    CCAA_o == "CN" ~ 40595518,
+    CCAA_o == "CB" ~ 12336462,
+    CCAA_o == "CL" ~ 53273013,
+    CCAA_o == "CM" ~ 37138498,
+    CCAA_o == "CT" ~ 204481121,
+    CCAA_o == "VC" ~ 100185814,
+    CCAA_o == "EX" ~ 17915529,
+    CCAA_o == "GA" ~ 56697862,
+    CCAA_o == "MD" ~ 204157575,
+    CCAA_o == "MC" ~ 28508914,
+    CCAA_o == "NC" ~ 18153613,
+    CCAA_o == "PV" ~ 65027322,
+    CCAA_o == "RI" ~ 7966992,
+    TRUE ~ pib_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2015 <- datos_2015 %>%
+  mutate(pib_d = case_when(
+    CCAA_d == "AN" ~ 144859000,
+    CCAA_d == "AR" ~ 32896878,
+    CCAA_d == "AS" ~ 21389062,
+    CCAA_d == "IB" ~ 28271040,
+    CCAA_d == "CN" ~ 40595518,
+    CCAA_d == "CB" ~ 12336462,
+    CCAA_d == "CL" ~ 53273013,
+    CCAA_d == "CM" ~ 37138498,
+    CCAA_d == "CT" ~ 204481121,
+    CCAA_d == "VC" ~ 100185814,
+    CCAA_d == "EX" ~ 17915529,
+    CCAA_d == "GA" ~ 56697862,
+    CCAA_d == "MD" ~ 204157575,
+    CCAA_d == "MC" ~ 28508914,
+    CCAA_d == "NC" ~ 18153613,
+    CCAA_d == "PV" ~ 65027322,
+    CCAA_d == "RI" ~ 7966992,
+    TRUE ~ pib_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#VIVIENDA
+datos_2015 <- datos_2015 %>%
+  mutate(vivienda_o = case_when(
+    CCAA_o == "AN" ~ 100.00,
+    CCAA_o == "AR" ~ 100.00,
+    CCAA_o == "AS" ~ 100.00,
+    CCAA_o == "IB" ~ 100.00,
+    CCAA_o == "CN" ~ 100.00,
+    CCAA_o == "CB" ~ 100.00,
+    CCAA_o == "CL" ~ 100.00,
+    CCAA_o == "CM" ~ 100.00,
+    CCAA_o == "CT" ~ 100.00,
+    CCAA_o == "VC" ~ 100.00,
+    CCAA_o == "EX" ~ 100.00,
+    CCAA_o == "GA" ~ 100.00,
+    CCAA_o == "MD" ~ 100.00,
+    CCAA_o == "MC" ~ 100.00,
+    CCAA_o == "NC" ~ 100.00,
+    CCAA_o == "PV" ~ 100.00,
+    CCAA_o == "RI" ~ 100.00,
+    TRUE ~ vivienda_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2015 <- datos_2015 %>%
+  mutate(vivienda_d = case_when(
+    CCAA_d == "AN" ~ 100.00,
+    CCAA_d == "AR" ~ 100.00,
+    CCAA_d == "AS" ~ 100.00,
+    CCAA_d == "IB" ~ 100.00,
+    CCAA_d == "CN" ~ 100.00,
+    CCAA_d == "CB" ~ 100.00,
+    CCAA_d == "CL" ~ 100.00,
+    CCAA_d == "CM" ~ 100.00,
+    CCAA_d == "CT" ~ 100.00,
+    CCAA_d == "VC" ~ 100.00,
+    CCAA_d == "EX" ~ 100.00,
+    CCAA_d == "GA" ~ 100.00,
+    CCAA_d == "MD" ~ 100.00,
+    CCAA_d == "MC" ~ 100.00,
+    CCAA_d == "NC" ~ 100.00,
+    CCAA_d == "PV" ~ 100.00,
+    CCAA_d == "RI" ~ 100.00,
+    TRUE ~ vivienda_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#DESEMPLEO
+datos_2015 <- datos_2015 %>%
+  mutate(tasa_desempleo_o = case_when(
+    CCAA_o == "AN" ~ 31.54,
+    CCAA_o == "AR" ~ 16.29,
+    CCAA_o == "AS" ~ 19.11,
+    CCAA_o == "IB" ~ 17.31,
+    CCAA_o == "CN" ~ 29.11,
+    CCAA_o == "CB" ~ 17.65,
+    CCAA_o == "CL" ~ 18.26,
+    CCAA_o == "CM" ~ 26.35,
+    CCAA_o == "CT" ~ 18.6,
+    CCAA_o == "VC" ~ 22.78,
+    CCAA_o == "EX" ~ 29.09,
+    CCAA_o == "GA" ~ 19.31,
+    CCAA_o == "MD" ~ 17.06,
+    CCAA_o == "MC" ~ 24.62,
+    CCAA_o == "NC" ~ 13.83,
+    CCAA_o == "PV" ~ 14.78,
+    CCAA_o == "RI" ~ 15.39,
+    TRUE ~ tasa_desempleo_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2015 <- datos_2015 %>%
+  mutate(tasa_desempleo_d = case_when(
+    CCAA_d == "AN" ~ 31.54,
+    CCAA_d == "AR" ~ 16.29,
+    CCAA_d == "AS" ~ 19.11,
+    CCAA_d == "IB" ~ 17.31,
+    CCAA_d == "CN" ~ 29.11,
+    CCAA_d == "CB" ~ 17.65,
+    CCAA_d == "CL" ~ 18.26,
+    CCAA_d == "CM" ~ 26.35,
+    CCAA_d == "CT" ~ 18.6,
+    CCAA_d == "VC" ~ 22.78,
+    CCAA_d == "EX" ~ 29.09,
+    CCAA_d == "GA" ~ 19.31,
+    CCAA_d == "MD" ~ 17.06,
+    CCAA_d == "MC" ~ 24.62,
+    CCAA_d == "NC" ~ 13.83,
+    CCAA_d == "PV" ~ 14.78,
+    CCAA_d == "RI" ~ 15.39,
+    TRUE ~ tasa_desempleo_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#AMPI
+datos_2015 <- datos_2015 %>%
+  mutate(ampi_o = case_when(
+    CCAA_o == "AN" ~ 98.08,
+    CCAA_o == "AR" ~ 102.96,
+    CCAA_o == "AS" ~ 102.88,
+    CCAA_o == "IB" ~ 101.95,
+    CCAA_o == "CN" ~ 97.07,
+    CCAA_o == "CB" ~ 102.51,
+    CCAA_o == "CL" ~ 99.65,
+    CCAA_o == "CM" ~ 100.16,
+    CCAA_o == "CT" ~ 101.00,
+    CCAA_o == "VC" ~ 101.53,
+    CCAA_o == "EX" ~ 98.89,
+    CCAA_o == "GA" ~ 96.89,
+    CCAA_o == "MD" ~ 101.40,
+    CCAA_o == "MC" ~ 99.19,
+    CCAA_o == "NC" ~ 105.07,
+    CCAA_o == "PV" ~ 102.90,
+    CCAA_o == "RI" ~ 103.79,
+    TRUE ~ ampi_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2015 <- datos_2015 %>%
+  mutate(ampi_d = case_when(
+    CCAA_d == "AN" ~ 98.08,
+    CCAA_d == "AR" ~ 102.96,
+    CCAA_d == "AS" ~ 102.88,
+    CCAA_d == "IB" ~ 101.95,
+    CCAA_d == "CN" ~ 97.07,
+    CCAA_d == "CB" ~ 102.51,
+    CCAA_d == "CL" ~ 99.65,
+    CCAA_d == "CM" ~ 100.16,
+    CCAA_d == "CT" ~ 101.00,
+    CCAA_d == "VC" ~ 101.53,
+    CCAA_d == "EX" ~ 98.89,
+    CCAA_d == "GA" ~ 96.89,
+    CCAA_d == "MD" ~ 101.40,
+    CCAA_d == "MC" ~ 99.19,
+    CCAA_d == "NC" ~ 105.07,
+    CCAA_d == "PV" ~ 102.90,
+    CCAA_d == "RI" ~ 103.79,
+    TRUE ~ ampi_d # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+```
+
+
+# 2016
+```{r}
+library(readxl)
+datos_2016 <- read_excel("C:/Users/Usuario/Desktop/tfg/DATOS.xlsx", sheet = "2016")
+
+library(dplyr)
+
+#POBLACION
+datos_2016 <- datos_2016 %>%
+  mutate(poblacion_o = case_when(
+    CCAA_o == "AN" ~ 8392046,
+    CCAA_o == "AR" ~ 1318042,
+    CCAA_o == "AS" ~ 1040407,
+    CCAA_o == "IB" ~ 1117353,
+    CCAA_o == "CN" ~ 2103436,
+    CCAA_o == "CB" ~ 582494,
+    CCAA_o == "CL" ~ 2452721,
+    CCAA_o == "CM" ~ 2049336,
+    CCAA_o == "CT" ~ 7440692,
+    CCAA_o == "VC" ~ 4939888,
+    CCAA_o == "EX" ~ 1086153,
+    CCAA_o == "GA" ~ 2719095,
+    CCAA_o == "MD" ~ 6411466,
+    CCAA_o == "MC" ~ 1468367,
+    CCAA_o == "NC" ~ 638922,
+    CCAA_o == "PV" ~ 2174426,
+    CCAA_o == "RI" ~ 314025,
+    TRUE ~ poblacion_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2016 <- datos_2016 %>%
+  mutate(poblacion_d = case_when(
+    CCAA_d == "AN" ~ 8392046,
+    CCAA_d == "AR" ~ 1318042,
+    CCAA_d == "AS" ~ 1040407,
+    CCAA_d == "IB" ~ 1117353,
+    CCAA_d == "CN" ~ 2103436,
+    CCAA_d == "CB" ~ 582494,
+    CCAA_d == "CL" ~ 2452721,
+    CCAA_d == "CM" ~ 2049336,
+    CCAA_d == "CT" ~ 7440692,
+    CCAA_d == "VC" ~ 4939888,
+    CCAA_d == "EX" ~ 1086153,
+    CCAA_d == "GA" ~ 2719095,
+    CCAA_d == "MD" ~ 6411466,
+    CCAA_d == "MC" ~ 1468367,
+    CCAA_d == "NC" ~ 638922,
+    CCAA_d == "PV" ~ 2174426,
+    CCAA_d == "RI" ~ 314025,
+    TRUE ~ poblacion_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#PIB
+datos_2016 <- datos_2016 %>%
+  mutate(pib_o = case_when(
+    CCAA_o == "AN" ~ 148401635,
+    CCAA_o == "AR" ~ 34210384,
+    CCAA_o == "AS" ~ 21692554,
+    CCAA_o == "IB" ~ 29826671,
+    CCAA_o == "CN" ~ 42007287,
+    CCAA_o == "CB" ~ 12735884,
+    CCAA_o == "CL" ~ 54764564,
+    CCAA_o == "CM" ~ 38314671,
+    CCAA_o == "CT" ~ 212655821,
+    CCAA_o == "VC" ~ 103220394,
+    CCAA_o == "EX" ~ 18504867,
+    CCAA_o == "GA" ~ 58271372,
+    CCAA_o == "MD" ~ 212360938,
+    CCAA_o == "MC" ~ 29366951,
+    CCAA_o == "NC" ~ 18743492,
+    CCAA_o == "PV" ~ 67114320,
+    CCAA_o == "RI" ~ 8013970,
+    TRUE ~ pib_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2016 <- datos_2016 %>%
+  mutate(pib_d = case_when(
+    CCAA_d == "AN" ~ 148401635,
+    CCAA_d == "AR" ~ 34210384,
+    CCAA_d == "AS" ~ 21692554,
+    CCAA_d == "IB" ~ 29826671,
+    CCAA_d == "CN" ~ 42007287,
+    CCAA_d == "CB" ~ 12735884,
+    CCAA_d == "CL" ~ 54764564,
+    CCAA_d == "CM" ~ 38314671,
+    CCAA_d == "CT" ~ 212655821,
+    CCAA_d == "VC" ~ 103220394,
+    CCAA_d == "EX" ~ 18504867,
+    CCAA_d == "GA" ~ 58271372,
+    CCAA_d == "MD" ~ 212360938,
+    CCAA_d == "MC" ~ 29366951,
+    CCAA_d == "NC" ~ 18743492,
+    CCAA_d == "PV" ~ 67114320,
+    CCAA_d == "RI" ~ 8013970,
+    TRUE ~ pib_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#VIVIENDA
+datos_2016 <- datos_2016 %>%
+  mutate(vivienda_o = case_when(
+    CCAA_o == "AN" ~ 102.841,
+    CCAA_o == "AR" ~ 101.896,
+    CCAA_o == "AS" ~ 101.418,
+    CCAA_o == "IB" ~ 106.176,
+    CCAA_o == "CN" ~ 103.344,
+    CCAA_o == "CB" ~ 102.547,
+    CCAA_o == "CL" ~ 101.056,
+    CCAA_o == "CM" ~ 100.838,
+    CCAA_o == "CT" ~ 107.020,
+    CCAA_o == "VC" ~ 102.612,
+    CCAA_o == "EX" ~ 101.430,
+    CCAA_o == "GA" ~ 101.957,
+    CCAA_o == "MD" ~ 108.566,
+    CCAA_o == "MC" ~ 101.397,
+    CCAA_o == "NC" ~ 101.676,
+    CCAA_o == "PV" ~ 102.574,
+    CCAA_o == "RI" ~ 101.960,
+    TRUE ~ vivienda_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2016 <- datos_2016 %>%
+  mutate(vivienda_d = case_when(
+    CCAA_d== "AN" ~ 102.841,
+    CCAA_d== "AR" ~ 101.896,
+    CCAA_d== "AS" ~ 101.418,
+    CCAA_d== "IB" ~ 106.176,
+    CCAA_d== "CN" ~ 103.344,
+    CCAA_d== "CB" ~ 102.547,
+    CCAA_d== "CL" ~ 101.056,
+    CCAA_d== "CM" ~ 100.838,
+    CCAA_d== "CT" ~ 107.020,
+    CCAA_d== "VC" ~ 102.612,
+    CCAA_d== "EX" ~ 101.430,
+    CCAA_d== "GA" ~ 101.957,
+    CCAA_d== "MD" ~ 108.566,
+    CCAA_d== "MC" ~ 101.397,
+    CCAA_d== "NC" ~ 101.676,
+    CCAA_d== "PV" ~ 102.574,
+    CCAA_d== "RI" ~ 101.960,
+    TRUE ~ vivienda_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#DESEMPLEO
+datos_2016 <- datos_2016 %>%
+  mutate(tasa_desempleo_o = case_when(
+    CCAA_o == "AN" ~ 28.89,
+    CCAA_o == "AR" ~ 14.74,
+    CCAA_o == "AS" ~ 17.62,
+    CCAA_o == "IB" ~ 13.89,
+    CCAA_o == "CN" ~ 26.06,
+    CCAA_o == "CB" ~ 14.89,
+    CCAA_o == "CL" ~ 15.82,
+    CCAA_o == "CM" ~ 23.55,
+    CCAA_o == "CT" ~ 15.72,
+    CCAA_o == "VC" ~ 20.61,
+    CCAA_o == "EX" ~ 27.52,
+    CCAA_o == "GA" ~ 17.15,
+    CCAA_o == "MD" ~ 15.72,
+    CCAA_o == "MC" ~ 19.78,
+    CCAA_o == "NC" ~ 12.48,
+    CCAA_o == "PV" ~ 12.59,
+    CCAA_o == "RI" ~ 13.55,
+    TRUE ~ tasa_desempleo_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2016 <- datos_2016 %>%
+  mutate(tasa_desempleo_d = case_when(
+    CCAA_d == "AN" ~ 28.89,
+    CCAA_d == "AR" ~ 14.74,
+    CCAA_d == "AS" ~ 17.62,
+    CCAA_d == "IB" ~ 13.89,
+    CCAA_d == "CN" ~ 26.06,
+    CCAA_d == "CB" ~ 14.89,
+    CCAA_d == "CL" ~ 15.82,
+    CCAA_d == "CM" ~ 23.55,
+    CCAA_d == "CT" ~ 15.72,
+    CCAA_d == "VC" ~ 20.61,
+    CCAA_d == "EX" ~ 27.52,
+    CCAA_d == "GA" ~ 17.15,
+    CCAA_d == "MD" ~ 15.72,
+    CCAA_d == "MC" ~ 19.78,
+    CCAA_d == "NC" ~ 12.48,
+    CCAA_d == "PV" ~ 12.59,
+    CCAA_d == "RI" ~ 13.55,
+    TRUE ~ tasa_desempleo_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#AMPI
+datos_2016 <- datos_2016 %>%
+  mutate(ampi_o = case_when(
+    CCAA_o == "AN" ~ 98.26,
+    CCAA_o == "AR" ~ 103.21,
+    CCAA_o == "AS" ~ 102.92,
+    CCAA_o == "IB" ~ 102.58,
+    CCAA_o == "CN" ~ 97.36,
+    CCAA_o == "CB" ~ 102.47,
+    CCAA_o == "CL" ~ 99.76,
+    CCAA_o == "CM" ~ 100.22,
+    CCAA_o == "CT" ~ 101.59,
+    CCAA_o == "VC" ~ 101.74,
+    CCAA_o == "EX" ~ 98.93,
+    CCAA_o == "GA" ~ 97.30,
+    CCAA_o == "MD" ~ 101.63,
+    CCAA_o == "MC" ~ 99.49,
+    CCAA_o == "NC" ~ 105.64,
+    CCAA_o == "PV" ~ 103.22,
+    CCAA_o == "RI" ~ 104.07,
+    TRUE ~ ampi_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2016 <- datos_2016 %>%
+  mutate(ampi_d = case_when(
+    CCAA_d == "AN" ~ 98.26,
+    CCAA_d == "AR" ~ 103.21,
+    CCAA_d == "AS" ~ 102.92,
+    CCAA_d == "IB" ~ 102.58,
+    CCAA_d == "CN" ~ 97.36,
+    CCAA_d == "CB" ~ 102.47,
+    CCAA_d == "CL" ~ 99.76,
+    CCAA_d == "CM" ~ 100.22,
+    CCAA_d == "CT" ~ 101.59,
+    CCAA_d == "VC" ~ 101.74,
+    CCAA_d == "EX" ~ 98.93,
+    CCAA_d == "GA" ~ 97.30,
+    CCAA_d == "MD" ~ 101.63,
+    CCAA_d == "MC" ~ 99.49,
+    CCAA_d == "NC" ~ 105.64,
+    CCAA_d == "PV" ~ 103.22,
+    CCAA_d == "RI" ~ 104.07,
+    TRUE ~ ampi_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+```
+
+
+# 2017
+```{r}
+library(readxl)
+datos_2017 <- read_excel("C:/Users/Usuario/Desktop/tfg/DATOS.xlsx", sheet = "2017")
+
+library(dplyr)
+
+#POBLACION
+datos_2017 <- datos_2017 %>%
+  mutate(poblacion_o = case_when(
+    CCAA_o == "AN" ~ 8394017,
+    CCAA_o == "AR" ~ 1315411,
+    CCAA_o == "AS" ~ 1033550,
+    CCAA_o == "IB" ~ 1128492,
+    CCAA_o == "CN" ~ 2115233,
+    CCAA_o == "CB" ~ 581421,
+    CCAA_o == "CL" ~ 2433535,
+    CCAA_o == "CM" ~ 2041422,
+    CCAA_o == "CT" ~ 7480778,
+    CCAA_o == "VC" ~ 4943821,
+    CCAA_o == "EX" ~ 1079108,
+    CCAA_o == "GA" ~ 2708955,
+    CCAA_o == "MD" ~ 6459297,
+    CCAA_o == "MC" ~ 1475275,
+    CCAA_o == "NC" ~ 642075,
+    CCAA_o == "PV" ~ 2179944,
+    CCAA_o == "RI" ~ 314136,
+    TRUE ~ poblacion_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2017 <- datos_2017 %>%
+  mutate(poblacion_d = case_when(
+    CCAA_d == "AN" ~ 8394017,
+    CCAA_d == "AR" ~ 1315411,
+    CCAA_d == "AS" ~ 1033550,
+    CCAA_d == "IB" ~ 1128492,
+    CCAA_d == "CN" ~ 2115233,
+    CCAA_d == "CB" ~ 581421,
+    CCAA_d == "CL" ~ 2433535,
+    CCAA_d == "CM" ~ 2041422,
+    CCAA_d == "CT" ~ 7480778,
+    CCAA_d == "VC" ~ 4943821,
+    CCAA_d == "EX" ~ 1079108,
+    CCAA_d == "GA" ~ 2708955,
+    CCAA_d == "MD" ~ 6459297,
+    CCAA_d == "MC" ~ 1475275,
+    CCAA_d == "NC" ~ 642075,
+    CCAA_d == "PV" ~ 2179944,
+    CCAA_d == "RI" ~ 314136,
+    TRUE ~ poblacion_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#PIB
+datos_2017 <- datos_2017 %>%
+  mutate(pib_o = case_when(
+    CCAA_o == "AN" ~ 155397322,
+    CCAA_o == "AR" ~ 35640507,
+    CCAA_o == "AS" ~ 22595763,
+    CCAA_o == "IB" ~ 31387148,
+    CCAA_o == "CN" ~ 44209198,
+    CCAA_o == "CB" ~ 13228614,
+    CCAA_o == "CL" ~ 56058853,
+    CCAA_o == "CM" ~ 39897062,
+    CCAA_o == "CT" ~ 221482095,
+    CCAA_o == "VC" ~ 107799459,
+    CCAA_o == "EX" ~ 19538313,
+    CCAA_o == "GA" ~ 60397896,
+    CCAA_o == "MD" ~ 222566193,
+    CCAA_o == "MC" ~ 30540937,
+    CCAA_o == "NC" ~ 19528931,
+    CCAA_o == "PV" ~ 69660724,
+    CCAA_o == "RI" ~ 8295967,
+    TRUE ~ pib_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2017 <- datos_2017 %>%
+  mutate(pib_d = case_when(
+    CCAA_d == "AN" ~ 155397322,
+    CCAA_d == "AR" ~ 35640507,
+    CCAA_d == "AS" ~ 22595763,
+    CCAA_d == "IB" ~ 31387148,
+    CCAA_d == "CN" ~ 44209198,
+    CCAA_d == "CB" ~ 13228614,
+    CCAA_d == "CL" ~ 56058853,
+    CCAA_d == "CM" ~ 39897062,
+    CCAA_d == "CT" ~ 221482095,
+    CCAA_d == "VC" ~ 107799459,
+    CCAA_d == "EX" ~ 19538313,
+    CCAA_d == "GA" ~ 60397896,
+    CCAA_d == "MD" ~ 222566193,
+    CCAA_d == "MC" ~ 30540937,
+    CCAA_d == "NC" ~ 19528931,
+    CCAA_d == "PV" ~ 69660724,
+    CCAA_d == "RI" ~ 8295967,
+    TRUE ~ pib_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#VIVIENDA
+datos_2017 <- datos_2017 %>%
+  mutate(vivienda_o = case_when(
+    CCAA_o == "AN" ~ 106.101,
+    CCAA_o == "AR" ~ 104.788,
+    CCAA_o == "AS" ~ 102.535,
+    CCAA_o == "IB" ~ 114.627,
+    CCAA_o == "CN" ~ 107.888,
+    CCAA_o == "CB" ~ 106.683,
+    CCAA_o == "CL" ~ 102.710,
+    CCAA_o == "CM" ~ 101.582,
+    CCAA_o == "CT" ~ 117.260,
+    CCAA_o == "VC" ~ 105.385,
+    CCAA_o == "EX" ~ 101.850,
+    CCAA_o == "GA" ~ 103.717,
+    CCAA_o == "MD" ~ 121.003,
+    CCAA_o == "MC" ~ 102.612,
+    CCAA_o == "NC" ~ 103.935,
+    CCAA_o == "PV" ~ 107.890,
+    CCAA_o == "RI" ~ 104.037,
+    TRUE ~ vivienda_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2017 <- datos_2017 %>%
+  mutate(vivienda_d = case_when(
+    CCAA_d == "AN" ~ 106.101,
+    CCAA_d == "AR" ~ 104.788,
+    CCAA_d == "AS" ~ 102.535,
+    CCAA_d == "IB" ~ 114.627,
+    CCAA_d == "CN" ~ 107.888,
+    CCAA_d == "CB" ~ 106.683,
+    CCAA_d == "CL" ~ 102.710,
+    CCAA_d == "CM" ~ 101.582,
+    CCAA_d == "CT" ~ 117.260,
+    CCAA_d == "VC" ~ 105.385,
+    CCAA_d == "EX" ~ 101.850,
+    CCAA_d == "GA" ~ 103.717,
+    CCAA_d == "MD" ~ 121.003,
+    CCAA_d == "MC" ~ 102.612,
+    CCAA_d == "NC" ~ 103.935,
+    CCAA_d == "PV" ~ 107.890,
+    CCAA_d == "RI" ~ 104.037,
+    TRUE ~ vivienda_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#DESEMPLEO
+datos_2017 <- datos_2017 %>%
+  mutate(tasa_desempleo_o = case_when(
+    CCAA_o == "AN" ~ 25.51,
+    CCAA_o == "AR" ~ 11.65,
+    CCAA_o == "AS" ~ 13.71,
+    CCAA_o == "IB" ~ 12.43,
+    CCAA_o == "CN" ~ 23.46,
+    CCAA_o == "CB" ~ 13.56,
+    CCAA_o == "CL" ~ 14.08,
+    CCAA_o == "CM" ~ 20.77,
+    CCAA_o == "CT" ~ 13.41,
+    CCAA_o == "VC" ~ 18.17,
+    CCAA_o == "EX" ~ 26.22,
+    CCAA_o == "GA" ~ 15.67,
+    CCAA_o == "MD" ~ 13.34,
+    CCAA_o == "MC" ~ 18.03,
+    CCAA_o == "NC" ~ 10.24,
+    CCAA_o == "PV" ~ 11.31,
+    CCAA_o == "RI" ~ 12,
+    TRUE ~ tasa_desempleo_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2017 <- datos_2017 %>%
+  mutate(tasa_desempleo_d = case_when(
+    CCAA_d == "AN" ~ 25.51,
+    CCAA_d == "AR" ~ 11.65,
+    CCAA_d == "AS" ~ 13.71,
+    CCAA_d == "IB" ~ 12.43,
+    CCAA_d == "CN" ~ 23.46,
+    CCAA_d == "CB" ~ 13.56,
+    CCAA_d == "CL" ~ 14.08,
+    CCAA_d == "CM" ~ 20.77,
+    CCAA_d == "CT" ~ 13.41,
+    CCAA_d == "VC" ~ 18.17,
+    CCAA_d == "EX" ~ 26.22,
+    CCAA_d == "GA" ~ 15.67,
+    CCAA_d == "MD" ~ 13.34,
+    CCAA_d == "MC" ~ 18.03,
+    CCAA_d == "NC" ~ 10.24,
+    CCAA_d == "PV" ~ 11.31,
+    CCAA_d == "RI" ~ 12,
+    TRUE ~ tasa_desempleo_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#AMPI
+datos_2017 <- datos_2017 %>%
+  mutate(ampi_o = case_when(
+    CCAA_o == "AN" ~ 98.85,
+    CCAA_o == "AR" ~ 103.76,
+    CCAA_o == "AS" ~ 103.48,
+    CCAA_o == "IB" ~ 102.60,
+    CCAA_o == "CN" ~ 98.01,
+    CCAA_o == "CB" ~ 104.09,
+    CCAA_o == "CL" ~ 99.91,
+    CCAA_o == "CM" ~ 101.12,
+    CCAA_o == "CT" ~ 101.86,
+    CCAA_o == "VC" ~ 102.14,
+    CCAA_o == "EX" ~ 99.44,
+    CCAA_o == "GA" ~ 97.79,
+    CCAA_o == "MD" ~ 102.41,
+    CCAA_o == "MC" ~ 99.59,
+    CCAA_o == "NC" ~ 106.34,
+    CCAA_o == "PV" ~ 103.27,
+    CCAA_o == "RI" ~ 104.69,
+    TRUE ~ ampi_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+
+datos_2017 <- datos_2017 %>%
+  mutate(ampi_d = case_when(
+    CCAA_d == "AN" ~ 98.85,
+    CCAA_d == "AR" ~ 103.76,
+    CCAA_d == "AS" ~ 103.48,
+    CCAA_d == "IB" ~ 102.60,
+    CCAA_d == "CN" ~ 98.01,
+    CCAA_d == "CB" ~ 104.09,
+    CCAA_d == "CL" ~ 99.91,
+    CCAA_d == "CM" ~ 101.12,
+    CCAA_d == "CT" ~ 101.86,
+    CCAA_d == "VC" ~ 102.14,
+    CCAA_d == "EX" ~ 99.44,
+    CCAA_d == "GA" ~ 97.79,
+    CCAA_d == "MD" ~ 102.41,
+    CCAA_d == "MC" ~ 99.59,
+    CCAA_d == "NC" ~ 106.34,
+    CCAA_d == "PV" ~ 103.27,
+    CCAA_d == "RI" ~ 104.69,
+    TRUE ~ ampi_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+```
+
+
+# 2018
+```{r}
+library(readxl)
+datos_2018 <- read_excel("C:/Users/Usuario/Desktop/tfg/DATOS.xlsx", sheet = "2018")
+
+library(dplyr)
+
+#POBLACION 
+datos_2018 <- datos_2018 %>%
+  mutate(poblacion_o = case_when(
+    CCAA_o == "AN" ~ 8396464,
+    CCAA_o == "AR" ~ 1313493,
+    CCAA_o == "AS" ~ 1027091,
+    CCAA_o == "IB" ~ 1141233,
+    CCAA_o == "CN" ~ 2131581,
+    CCAA_o == "CB" ~ 581533,
+    CCAA_o == "CL" ~ 2417013,
+    CCAA_o == "CM" ~ 2034409,
+    CCAA_o == "CT" ~ 7539364,
+    CCAA_o == "VC" ~ 4958584,
+    CCAA_o == "EX" ~ 1072721,
+    CCAA_o == "GA" ~ 2703048,
+    CCAA_o == "MD" ~ 6529923,
+    CCAA_o == "MC" ~ 1478718,
+    CCAA_o == "NC" ~ 646340,
+    CCAA_o == "PV" ~ 2187254,
+    CCAA_o == "RI" ~ 314890,
+    TRUE ~ poblacion_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2018 <- datos_2018 %>%
+  mutate(poblacion_d = case_when(
+    CCAA_d == "AN" ~ 8396464,
+    CCAA_d == "AR" ~ 1313493,
+    CCAA_d == "AS" ~ 1027091,
+    CCAA_d == "IB" ~ 1141233,
+    CCAA_d == "CN" ~ 2131581,
+    CCAA_d == "CB" ~ 581533,
+    CCAA_d == "CL" ~ 2417013,
+    CCAA_d == "CM" ~ 2034409,
+    CCAA_d == "CT" ~ 7539364,
+    CCAA_d == "VC" ~ 4958584,
+    CCAA_d == "EX" ~ 1072721,
+    CCAA_d == "GA" ~ 2703048,
+    CCAA_d == "MD" ~ 6529923,
+    CCAA_d == "MC" ~ 1478718,
+    CCAA_d == "NC" ~ 646340,
+    CCAA_d == "PV" ~ 2187254,
+    CCAA_d == "RI" ~ 314890,
+    TRUE ~ poblacion_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#PIB
+datos_2018 <- datos_2018 %>%
+  mutate(pib_o = case_when(
+    CCAA_o == "AN" ~ 160586830,
+    CCAA_o == "AR" ~ 36867512,
+    CCAA_o == "AS" ~ 23225369,
+    CCAA_o == "IB" ~ 32740793,
+    CCAA_o == "CN" ~ 45829590,
+    CCAA_o == "CB" ~ 13743992,
+    CCAA_o == "CL" ~ 58545871,
+    CCAA_o == "CM" ~ 41480976,
+    CCAA_o == "CT" ~ 229083098,
+    CCAA_o == "VC" ~ 111743287,
+    CCAA_o == "EX" ~ 20091410,
+    CCAA_o == "GA" ~ 62425422,
+    CCAA_o == "MD" ~ 231423389,
+    CCAA_o == "MC" ~ 31094181,
+    CCAA_o == "NC" ~ 20063495,
+    CCAA_o == "PV" ~ 71921485,
+    CCAA_o == "RI" ~ 8602306,
+    TRUE ~ pib_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2018 <- datos_2018 %>%
+  mutate(pib_d = case_when(
+    CCAA_d == "AN" ~ 160586830,
+    CCAA_d == "AR" ~ 36867512,
+    CCAA_d == "AS" ~ 23225369,
+    CCAA_d == "IB" ~ 32740793,
+    CCAA_d == "CN" ~ 45829590,
+    CCAA_d == "CB" ~ 13743992,
+    CCAA_d == "CL" ~ 58545871,
+    CCAA_d == "CM" ~ 41480976,
+    CCAA_d == "CT" ~ 229083098,
+    CCAA_d == "VC" ~ 111743287,
+    CCAA_d == "EX" ~ 20091410,
+    CCAA_d == "GA" ~ 62425422,
+    CCAA_d == "MD" ~ 231423389,
+    CCAA_d == "MC" ~ 31094181,
+    CCAA_d == "NC" ~ 20063495,
+    CCAA_d == "PV" ~ 71921485,
+    CCAA_d == "RI" ~ 8602306,
+    TRUE ~ pib_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#VIVIENDA
+datos_2018 <- datos_2018 %>%
+  mutate(vivienda_o = case_when(
+    CCAA_o == "AN" ~ 111.371,
+    CCAA_o == "AR" ~ 109.837,
+    CCAA_o == "AS" ~ 106.123,
+    CCAA_o == "IB" ~ 123.185,
+    CCAA_o == "CN" ~ 113.276,
+    CCAA_o == "CB" ~ 112.938,
+    CCAA_o == "CL" ~ 106.921,
+    CCAA_o == "CM" ~ 103.975,
+    CCAA_o == "CT" ~ 127.548,
+    CCAA_o == "VC" ~ 109.676,
+    CCAA_o == "EX" ~ 103.737,
+    CCAA_o == "GA" ~ 107.673,
+    CCAA_o == "MD" ~ 133.325,
+    CCAA_o == "MC" ~ 106.140,
+    CCAA_o == "NC" ~ 107.557,
+    CCAA_o == "PV" ~ 113.748,
+    CCAA_o == "RI" ~ 109.157,
+    TRUE ~ vivienda_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2018 <- datos_2018 %>%
+  mutate(vivienda_d = case_when(
+    CCAA_d == "AN" ~ 111.371,
+    CCAA_d == "AR" ~ 109.837,
+    CCAA_d == "AS" ~ 106.123,
+    CCAA_d == "IB" ~ 123.185,
+    CCAA_d == "CN" ~ 113.276,
+    CCAA_d == "CB" ~ 112.938,
+    CCAA_d == "CL" ~ 106.921,
+    CCAA_d == "CM" ~ 103.975,
+    CCAA_d == "CT" ~ 127.548,
+    CCAA_d == "VC" ~ 109.676,
+    CCAA_d == "EX" ~ 103.737,
+    CCAA_d == "GA" ~ 107.673,
+    CCAA_d == "MD" ~ 133.325,
+    CCAA_d == "MC" ~ 106.140,
+    CCAA_d == "NC" ~ 107.557,
+    CCAA_d == "PV" ~ 113.748,
+    CCAA_d == "RI" ~ 109.157,
+    TRUE ~ vivienda_d # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#DESEMPLEO
+datos_2018 <- datos_2018 %>%
+  mutate(tasa_desempleo_o = case_when(
+    CCAA_o == "AN" ~ 22.99,
+    CCAA_o == "AR" ~ 10.63,
+    CCAA_o == "AS" ~ 13.61,
+    CCAA_o == "IB" ~ 11.52,
+    CCAA_o == "CN" ~ 20.07,
+    CCAA_o == "CB" ~ 10.67,
+    CCAA_o == "CL" ~ 12.1,
+    CCAA_o == "CM" ~ 18.16,
+    CCAA_o == "CT" ~ 11.49,
+    CCAA_o == "VC" ~ 15.59,
+    CCAA_o == "EX" ~ 23.64,
+    CCAA_o == "GA" ~ 13.34,
+    CCAA_o == "MD" ~ 12.22,
+    CCAA_o == "MC" ~ 16.76,
+    CCAA_o == "NC" ~ 10.02,
+    CCAA_o == "PV" ~ 9.97,
+    CCAA_o == "RI" ~ 10.4,
+    TRUE ~ tasa_desempleo_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2018 <- datos_2018 %>%
+  mutate(tasa_desempleo_d = case_when(
+    CCAA_d == "AN" ~ 22.99,
+    CCAA_d == "AR" ~ 10.63,
+    CCAA_d == "AS" ~ 13.61,
+    CCAA_d == "IB" ~ 11.52,
+    CCAA_d == "CN" ~ 20.07,
+    CCAA_d == "CB" ~ 10.67,
+    CCAA_d == "CL" ~ 12.1,
+    CCAA_d == "CM" ~ 18.16,
+    CCAA_d == "CT" ~ 11.49,
+    CCAA_d == "VC" ~ 15.59,
+    CCAA_d == "EX" ~ 23.64,
+    CCAA_d == "GA" ~ 13.34,
+    CCAA_d == "MD" ~ 12.22,
+    CCAA_d == "MC" ~ 16.76,
+    CCAA_d == "NC" ~ 10.02,
+    CCAA_d == "PV" ~ 9.97,
+    CCAA_d == "RI" ~ 10.4,
+    TRUE ~ tasa_desempleo_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#AMPI
+datos_2018 <- datos_2018 %>%
+  mutate(ampi_o = case_when(
+    CCAA_o == "AN" ~ 98.42,
+    CCAA_o == "AR" ~ 104.59,
+    CCAA_o == "AS" ~ 103.22,
+    CCAA_o == "IB" ~ 104.10,
+    CCAA_o == "CN" ~ 100.04,
+    CCAA_o == "CB" ~ 104.46,
+    CCAA_o == "CL" ~ 101.92,
+    CCAA_o == "CM" ~ 101.02,
+    CCAA_o == "CT" ~ 102.32,
+    CCAA_o == "VC" ~ 103.03,
+    CCAA_o == "EX" ~ 99.90,
+    CCAA_o == "GA" ~ 101.64,
+    CCAA_o == "MD" ~ 102.13,
+    CCAA_o == "MC" ~ 99.93,
+    CCAA_o == "NC" ~ 104.88,
+    CCAA_o == "PV" ~ 102.40,
+    CCAA_o == "RI" ~ 104.14,
+    TRUE ~ ampi_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2018 <- datos_2018 %>%
+  mutate(ampi_d = case_when(
+    CCAA_d == "AN" ~ 98.42,
+    CCAA_d == "AR" ~ 104.59,
+    CCAA_d == "AS" ~ 103.22,
+    CCAA_d == "IB" ~ 104.10,
+    CCAA_d == "CN" ~ 100.04,
+    CCAA_d == "CB" ~ 104.46,
+    CCAA_d == "CL" ~ 101.92,
+    CCAA_d == "CM" ~ 101.02,
+    CCAA_d == "CT" ~ 102.32,
+    CCAA_d == "VC" ~ 103.03,
+    CCAA_d == "EX" ~ 99.90,
+    CCAA_d == "GA" ~ 101.64,
+    CCAA_d == "MD" ~ 102.13,
+    CCAA_d == "MC" ~ 99.93,
+    CCAA_d == "NC" ~ 104.88,
+    CCAA_d == "PV" ~ 102.40,
+    CCAA_d == "RI" ~ 104.14,
+    TRUE ~ ampi_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+```
+
+
+# 2019
+```{r}
+library(readxl)
+datos_2019 <- read_excel("C:/Users/Usuario/Desktop/tfg/DATOS.xlsx", sheet = "2019")
+
+library(dplyr)
+
+#POBLACION
+datos_2019 <- datos_2019 %>%
+  mutate(poblacion_o = case_when(
+    CCAA_o == "AN" ~ 8412222,
+    CCAA_o == "AR" ~ 1320694,
+    CCAA_o == "AS" ~ 1021469,
+    CCAA_o == "IB" ~ 1157928,
+    CCAA_o == "CN" ~ 2153316,
+    CCAA_o == "CB" ~ 581989,
+    CCAA_o == "CL" ~ 2405568,
+    CCAA_o == "CM" ~ 2036777,
+    CCAA_o == "CT" ~ 7624625,
+    CCAA_o == "VC" ~ 4989308,
+    CCAA_o == "EX" ~ 1067925,
+    CCAA_o == "GA" ~ 2700210,
+    CCAA_o == "MD" ~ 6618078,
+    CCAA_o == "MC" ~ 1491312,
+    CCAA_o == "NC" ~ 652797,
+    CCAA_o == "PV" ~ 2197306,
+    CCAA_o == "RI" ~ 315967,
+    TRUE ~ poblacion_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2019 <- datos_2019 %>%
+  mutate(poblacion_d = case_when(
+    CCAA_d == "AN" ~ 8412222,
+    CCAA_d == "AR" ~ 1320694,
+    CCAA_d == "AS" ~ 1021469,
+    CCAA_d == "IB" ~ 1157928,
+    CCAA_d == "CN" ~ 2153316,
+    CCAA_d == "CB" ~ 581989,
+    CCAA_d == "CL" ~ 2405568,
+    CCAA_d == "CM" ~ 2036777,
+    CCAA_d == "CT" ~ 7624625,
+    CCAA_d == "VC" ~ 4989308,
+    CCAA_d == "EX" ~ 1067925,
+    CCAA_d == "GA" ~ 2700210,
+    CCAA_d == "MD" ~ 6618078,
+    CCAA_d == "MC" ~ 1491312,
+    CCAA_d == "NC" ~ 652797,
+    CCAA_d == "PV" ~ 2197306,
+    CCAA_d == "RI" ~ 315967,
+    TRUE ~ poblacion_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+
+#PIB
+datos_2019 <- datos_2019 %>%
+  mutate(pib_o = case_when(
+    CCAA_o == "AN" ~ 164929489,
+    CCAA_o == "AR" ~ 38049621,
+    CCAA_o == "AS" ~ 23711269,
+    CCAA_o == "IB" ~ 33935302,
+    CCAA_o == "CN" ~ 47182560,
+    CCAA_o == "CB" ~ 14180759,
+    CCAA_o == "CL" ~ 59798553,
+    CCAA_o == "CM" ~ 42398854,
+    CCAA_o == "CT" ~ 238308749,
+    CCAA_o == "VC" ~ 115606552,
+    CCAA_o == "EX" ~ 20478928,
+    CCAA_o == "GA" ~ 64220115,
+    CCAA_o == "MD" ~ 242093235,
+    CCAA_o == "MC" ~ 32319250,
+    CCAA_o == "NC" ~ 20873397,
+    CCAA_o == "PV" ~ 74074980,
+    CCAA_o == "RI" ~ 8822400,
+    TRUE ~ pib_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2019 <- datos_2019 %>%
+  mutate(pib_d = case_when(
+    CCAA_d == "AN" ~ 164929489,
+    CCAA_d == "AR" ~ 38049621,
+    CCAA_d == "AS" ~ 23711269,
+    CCAA_d == "IB" ~ 33935302,
+    CCAA_d == "CN" ~ 47182560,
+    CCAA_d == "CB" ~ 14180759,
+    CCAA_d == "CL" ~ 59798553,
+    CCAA_d == "CM" ~ 42398854,
+    CCAA_d == "CT" ~ 238308749,
+    CCAA_d == "VC" ~ 115606552,
+    CCAA_d == "EX" ~ 20478928,
+    CCAA_d == "GA" ~ 64220115,
+    CCAA_d == "MD" ~ 242093235,
+    CCAA_d == "MC" ~ 32319250,
+    CCAA_d == "NC" ~ 20873397,
+    CCAA_d == "PV" ~ 74074980,
+    CCAA_d == "RI" ~ 8822400,
+    TRUE ~ pib_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#VIVIENDA
+datos_2019 <- datos_2019 %>%
+  mutate(vivienda_o = case_when(
+    CCAA_o == "AN" ~ 117.358,
+    CCAA_o == "AR" ~ 116.513,
+    CCAA_o == "AS" ~ 110.561,
+    CCAA_o == "IB" ~ 130.597,
+    CCAA_o == "CN" ~ 117.587,
+    CCAA_o == "CB" ~ 116.423,
+    CCAA_o == "CL" ~ 112.083,
+    CCAA_o == "CM" ~ 107.643,
+    CCAA_o == "CT" ~ 134.144,
+    CCAA_o == "VC" ~ 114.306,
+    CCAA_o == "EX" ~ 105.765,
+    CCAA_o == "GA" ~ 111.998,
+    CCAA_o == "MD" ~ 141.142,
+    CCAA_o == "MC" ~ 110.973,
+    CCAA_o == "NC" ~ 111.614,
+    CCAA_o == "PV" ~ 118.688,
+    CCAA_o == "RI" ~ 115.012,
+    TRUE ~ vivienda_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2019 <- datos_2019 %>%
+  mutate(vivienda_d = case_when(
+    CCAA_d == "AN" ~ 117.358,
+    CCAA_d == "AR" ~ 116.513,
+    CCAA_d == "AS" ~ 110.561,
+    CCAA_d == "IB" ~ 130.597,
+    CCAA_d == "CN" ~ 117.587,
+    CCAA_d == "CB" ~ 116.423,
+    CCAA_d == "CL" ~ 112.083,
+    CCAA_d == "CM" ~ 107.643,
+    CCAA_d == "CT" ~ 134.144,
+    CCAA_d == "VC" ~ 114.306,
+    CCAA_d == "EX" ~ 105.765,
+    CCAA_d == "GA" ~ 111.998,
+    CCAA_d == "MD" ~ 141.142,
+    CCAA_d == "MC" ~ 110.973,
+    CCAA_d == "NC" ~ 111.614,
+    CCAA_d == "PV" ~ 118.688,
+    CCAA_d == "RI" ~ 115.012,
+    TRUE ~ vivienda_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#DESEMPLEO
+datos_2019 <- datos_2019 %>%
+  mutate(tasa_desempleo_o = case_when(
+    CCAA_o == "AN" ~ 21.19,
+    CCAA_o == "AR" ~ 10.03,
+    CCAA_o == "AS" ~ 14.19,
+    CCAA_o == "IB" ~ 11.74,
+    CCAA_o == "CN" ~ 20.49,
+    CCAA_o == "CB" ~ 10.28,
+    CCAA_o == "CL" ~ 11.63,
+    CCAA_o == "CM" ~ 16.21,
+    CCAA_o == "CT" ~ 11.03,
+    CCAA_o == "VC" ~ 14.11,
+    CCAA_o == "EX" ~ 21.53,
+    CCAA_o == "GA" ~ 11.76,
+    CCAA_o == "MD" ~ 10.62,
+    CCAA_o == "MC" ~ 14.68,
+    CCAA_o == "NC" ~ 8.24,
+    CCAA_o == "PV" ~ 9.15,
+    CCAA_o == "RI" ~ 9.96,
+    TRUE ~ tasa_desempleo_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2019 <- datos_2019 %>%
+  mutate(tasa_desempleo_d = case_when(
+    CCAA_d == "AN" ~ 21.19,
+    CCAA_d == "AR" ~ 10.03,
+    CCAA_d == "AS" ~ 14.19,
+    CCAA_d == "IB" ~ 11.74,
+    CCAA_d == "CN" ~ 20.49,
+    CCAA_d == "CB" ~ 10.28,
+    CCAA_d == "CL" ~ 11.63,
+    CCAA_d == "CM" ~ 16.21,
+    CCAA_d == "CT" ~ 11.03,
+    CCAA_d == "VC" ~ 14.11,
+    CCAA_d == "EX" ~ 21.53,
+    CCAA_d == "GA" ~ 11.76,
+    CCAA_d == "MD" ~ 10.62,
+    CCAA_d == "MC" ~ 14.68,
+    CCAA_d == "NC" ~ 8.24,
+    CCAA_d == "PV" ~ 9.15,
+    CCAA_d == "RI" ~ 9.96,
+    TRUE ~ tasa_desempleo_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#AMPI
+datos_2019 <- datos_2019 %>%
+  mutate(ampi_o = case_when(
+    CCAA_o == "AN" ~ 98.90,
+    CCAA_o == "AR" ~ 104.89,
+    CCAA_o == "AS" ~ 102.99,
+    CCAA_o == "IB" ~ 104.05,
+    CCAA_o == "CN" ~ 100.39,
+    CCAA_o == "CB" ~ 104.68,
+    CCAA_o == "CL" ~ 102.33,
+    CCAA_o == "CM" ~ 101.61,
+    CCAA_o == "CT" ~ 102.28,
+    CCAA_o == "VC" ~ 103.41,
+    CCAA_o == "EX" ~ 101.78,
+    CCAA_o == "GA" ~ 100.34,
+    CCAA_o == "MD" ~ 102.66,
+    CCAA_o == "MC" ~ 100.14,
+    CCAA_o == "NC" ~ 105.51,
+    CCAA_o == "PV" ~ 102.53,
+    CCAA_o == "RI" ~ 105.03,
+    TRUE ~ ampi_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2019 <- datos_2019 %>%
+  mutate(ampi_d = case_when(
+    CCAA_d == "AN" ~ 98.90,
+    CCAA_d == "AR" ~ 104.89,
+    CCAA_d == "AS" ~ 102.99,
+    CCAA_d == "IB" ~ 104.05,
+    CCAA_d == "CN" ~ 100.39,
+    CCAA_d == "CB" ~ 104.68,
+    CCAA_d == "CL" ~ 102.33,
+    CCAA_d == "CM" ~ 101.61,
+    CCAA_d == "CT" ~ 102.28,
+    CCAA_d == "VC" ~ 103.41,
+    CCAA_d == "EX" ~ 101.78,
+    CCAA_d == "GA" ~ 100.34,
+    CCAA_d == "MD" ~ 102.66,
+    CCAA_d == "MC" ~ 100.14,
+    CCAA_d == "NC" ~ 105.51,
+    CCAA_d == "PV" ~ 102.53,
+    CCAA_d == "RI" ~ 105.03,
+    TRUE ~ ampi_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+```
+
+
+
+
+# 2020
+```{r}
+library(readxl)
+datos_2020 <- read_excel("C:/Users/Usuario/Desktop/tfg/DATOS.xlsx", sheet = "2020")
+
+library(dplyr)
+
+#POBLACIO
+datos_2020 <- datos_2020 %>%
+  mutate(poblacion_o = case_when(
+    CCAA_o == "AN" ~ 8461039,
+    CCAA_o == "AR" ~ 1330592,
+    CCAA_o == "AS" ~ 1018053,
+    CCAA_o == "IB" ~ 1176816,
+    CCAA_o == "CN" ~ 2176240,
+    CCAA_o == "CB" ~ 583011,
+    CCAA_o == "CL" ~ 2398976,
+    CCAA_o == "CM" ~ 2047969,
+    CCAA_o == "CT" ~ 7720323,
+    CCAA_o == "VC" ~ 5046482,
+    CCAA_o == "EX" ~ 1064970,
+    CCAA_o == "GA" ~ 2702605,
+    CCAA_o == "MD" ~ 6720310,
+    CCAA_o == "MC" ~ 1509077,
+    CCAA_o == "NC" ~ 659907,
+    CCAA_o == "PV" ~ 2211917,
+    CCAA_o == "RI" ~ 318703,
+    TRUE ~ poblacion_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2020 <- datos_2020 %>%
+  mutate(poblacion_d = case_when(
+    CCAA_d == "AN" ~ 8461039,
+    CCAA_d == "AR" ~ 1330592,
+    CCAA_d == "AS" ~ 1018053,
+    CCAA_d == "IB" ~ 1176816,
+    CCAA_d == "CN" ~ 2176240,
+    CCAA_d == "CB" ~ 583011,
+    CCAA_d == "CL" ~ 2398976,
+    CCAA_d == "CM" ~ 2047969,
+    CCAA_d == "CT" ~ 7720323,
+    CCAA_d == "VC" ~ 5046482,
+    CCAA_d == "EX" ~ 1064970,
+    CCAA_d == "GA" ~ 2702605,
+    CCAA_d == "MD" ~ 6720310,
+    CCAA_d == "MC" ~ 1509077,
+    CCAA_d == "NC" ~ 659907,
+    CCAA_d == "PV" ~ 2211917,
+    CCAA_d == "RI" ~ 318703,
+    TRUE ~ poblacion_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#PIB
+datos_2020 <- datos_2020 %>%
+  mutate(pib_o = case_when(
+    CCAA_o == "AN" ~ 148779089,
+    CCAA_o == "AR" ~ 35521579,
+    CCAA_o == "AS" ~ 21319148,
+    CCAA_o == "IB" ~ 26198090,
+    CCAA_o == "CN" ~ 38630124,
+    CCAA_o == "CB" ~ 12852323,
+    CCAA_o == "CL" ~ 54836565,
+    CCAA_o == "CM" ~ 39346603,
+    CCAA_o == "CT" ~ 212611443,
+    CCAA_o == "VC" ~ 104753698,
+    CCAA_o == "EX" ~ 18840240,
+    CCAA_o == "GA" ~ 58663128,
+    CCAA_o == "MD" ~ 219030504,
+    CCAA_o == "MC" ~ 29775480,
+    CCAA_o == "NC" ~ 18937439,
+    CCAA_o == "PV" ~ 66495632,
+    CCAA_o == "RI" ~ 8105603,
+    TRUE ~ pib_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2020 <- datos_2020 %>%
+  mutate(pib_d = case_when(
+    CCAA_d == "AN" ~ 148779089,
+    CCAA_d == "AR" ~ 35521579,
+    CCAA_d == "AS" ~ 21319148,
+    CCAA_d == "IB" ~ 26198090,
+    CCAA_d == "CN" ~ 38630124,
+    CCAA_d == "CB" ~ 12852323,
+    CCAA_d == "CL" ~ 54836565,
+    CCAA_d == "CM" ~ 39346603,
+    CCAA_d == "CT" ~ 212611443,
+    CCAA_d == "VC" ~ 104753698,
+    CCAA_d == "EX" ~ 18840240,
+    CCAA_d == "GA" ~ 58663128,
+    CCAA_d == "MD" ~ 219030504,
+    CCAA_d == "MC" ~ 29775480,
+    CCAA_d == "NC" ~ 18937439,
+    CCAA_d == "PV" ~ 66495632,
+    CCAA_d == "RI" ~ 8105603,
+    TRUE ~ pib_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#VIVIENDA
+datos_2020 <- datos_2020 %>%
+  mutate(vivienda_o = case_when(
+    CCAA_o == "AN" ~ 120.098,
+    CCAA_o == "AR" ~ 119.487,
+    CCAA_o == "AS" ~ 114.072,
+    CCAA_o == "IB" ~ 135.899,
+    CCAA_o == "CN" ~ 118.960,
+    CCAA_o == "CB" ~ 117.829,
+    CCAA_o == "CL" ~ 114.719,
+    CCAA_o == "CM" ~ 109.029,
+    CCAA_o == "CT" ~ 136.892,
+    CCAA_o == "VC" ~ 116.814,
+    CCAA_o == "EX" ~ 106.309,
+    CCAA_o == "GA" ~ 114.516,
+    CCAA_o == "MD" ~ 143.560,
+    CCAA_o == "MC" ~ 114.378,
+    CCAA_o == "NC" ~ 113.491,
+    CCAA_o == "PV" ~ 121.362,
+    CCAA_o == "RI" ~ 117.180,
+    TRUE ~ vivienda_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2020 <- datos_2020 %>%
+  mutate(vivienda_d = case_when(
+    CCAA_d == "AN" ~ 120.098,
+    CCAA_d == "AR" ~ 119.487,
+    CCAA_d == "AS" ~ 114.072,
+    CCAA_d == "IB" ~ 135.899,
+    CCAA_d == "CN" ~ 118.960,
+    CCAA_d == "CB" ~ 117.829,
+    CCAA_d == "CL" ~ 114.719,
+    CCAA_d == "CM" ~ 109.029,
+    CCAA_d == "CT" ~ 136.892,
+    CCAA_d == "VC" ~ 116.814,
+    CCAA_d == "EX" ~ 106.309,
+    CCAA_d == "GA" ~ 114.516,
+    CCAA_d == "MD" ~ 143.560,
+    CCAA_d == "MC" ~ 114.378,
+    CCAA_d == "NC" ~ 113.491,
+    CCAA_d == "PV" ~ 121.362,
+    CCAA_d == "RI" ~ 117.180,
+    TRUE ~ vivienda_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#DESEMPLEO
+datos_2020 <- datos_2020 %>%
+  mutate(tasa_desempleo_o = case_when(
+    CCAA_o == "AN" ~ 22.28,
+    CCAA_o == "AR" ~ 11.7,
+    CCAA_o == "AS" ~ 14.12,
+    CCAA_o == "IB" ~ 16.14,
+    CCAA_o == "CN" ~ 22.62,
+    CCAA_o == "CB" ~ 12.14,
+    CCAA_o == "CL" ~ 12.06,
+    CCAA_o == "CM" ~ 17.68,
+    CCAA_o == "CT" ~ 12.63,
+    CCAA_o == "VC" ~ 16.19,
+    CCAA_o == "EX" ~ 21.8,
+    CCAA_o == "GA" ~ 12.02,
+    CCAA_o == "MD" ~ 12.49,
+    CCAA_o == "MC" ~ 16.18,
+    CCAA_o == "NC" ~ 10.06,
+    CCAA_o == "PV" ~ 9.54,
+    CCAA_o == "RI" ~ 10.8,
+    TRUE ~ tasa_desempleo_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2020 <- datos_2020 %>%
+  mutate(tasa_desempleo_d = case_when(
+    CCAA_d == "AN" ~ 22.28,
+    CCAA_d == "AR" ~ 11.7,
+    CCAA_d == "AS" ~ 14.12,
+    CCAA_d == "IB" ~ 16.14,
+    CCAA_d == "CN" ~ 22.62,
+    CCAA_d == "CB" ~ 12.14,
+    CCAA_d == "CL" ~ 12.06,
+    CCAA_d == "CM" ~ 17.68,
+    CCAA_d == "CT" ~ 12.63,
+    CCAA_d == "VC" ~ 16.19,
+    CCAA_d == "EX" ~ 21.8,
+    CCAA_d == "GA" ~ 12.02,
+    CCAA_d == "MD" ~ 12.49,
+    CCAA_d == "MC" ~ 16.18,
+    CCAA_d == "NC" ~ 10.06,
+    CCAA_d == "PV" ~ 9.54,
+    CCAA_d == "RI" ~ 10.8,
+    TRUE ~ tasa_desempleo_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#APMI
+datos_2020 <- datos_2020 %>%
+  mutate(ampi_o = case_when(
+    CCAA_o == "AN" ~ 98.53,
+    CCAA_o == "AR" ~ 104.86,
+    CCAA_o == "AS" ~ 103.42,
+    CCAA_o == "IB" ~ 104.57,
+    CCAA_o == "CN" ~ 98.86,
+    CCAA_o == "CB" ~ 104.34,
+    CCAA_o == "CL" ~ 101.80,
+    CCAA_o == "CM" ~ 101.55,
+    CCAA_o == "CT" ~ 101.99,
+    CCAA_o == "VC" ~ 103.03,
+    CCAA_o == "EX" ~ 101.23,
+    CCAA_o == "GA" ~ 100.34,
+    CCAA_o == "MD" ~ 102.37,
+    CCAA_o == "MC" ~ 99.87,
+    CCAA_o == "NC" ~ 105.88,
+    CCAA_o == "PV" ~ 102.96,
+    CCAA_o == "RI" ~ 104.77,
+    TRUE ~ ampi_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2020 <- datos_2020 %>%
+  mutate(ampi_d = case_when(
+    CCAA_d == "AN" ~ 98.53,
+    CCAA_d == "AR" ~ 104.86,
+    CCAA_d == "AS" ~ 103.42,
+    CCAA_d == "IB" ~ 104.57,
+    CCAA_d == "CN" ~ 98.86,
+    CCAA_d == "CB" ~ 104.34,
+    CCAA_d == "CL" ~ 101.80,
+    CCAA_d == "CM" ~ 101.55,
+    CCAA_d == "CT" ~ 101.99,
+    CCAA_d == "VC" ~ 103.03,
+    CCAA_d == "EX" ~ 101.23,
+    CCAA_d == "GA" ~ 100.34,
+    CCAA_d == "MD" ~ 102.37,
+    CCAA_d == "MC" ~ 99.87,
+    CCAA_d == "NC" ~ 105.88,
+    CCAA_d == "PV" ~ 102.96,
+    CCAA_d == "RI" ~ 104.77,
+    TRUE ~ ampi_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+```
+
+
+
+# 2021
+```{r}
+library(readxl)
+datos_2021 <- read_excel("C:/Users/Usuario/Desktop/tfg/DATOS.xlsx", sheet = "2021")
+
+library(dplyr)
+
+#POBLACIO
+datos_2021 <- datos_2021 %>%
+  mutate(poblacion_o = case_when(
+    CCAA_o == "AN" ~ 8484804,
+    CCAA_o == "AR" ~ 1331938,
+    CCAA_o == "AS" ~ 1012117,
+    CCAA_o == "IB" ~ 1183415,
+    CCAA_o == "CN" ~ 2178924,
+    CCAA_o == "CB" ~ 584708,
+    CCAA_o == "CL" ~ 2385223,
+    CCAA_o == "CM" ~ 2052505,
+    CCAA_o == "CT" ~ 7749896,
+    CCAA_o == "VC" ~ 5067911,
+    CCAA_o == "EX" ~ 1061636,
+    CCAA_o == "GA" ~ 2698177,
+    CCAA_o == "MD" ~ 6726640,
+    CCAA_o == "MC" ~ 1518279,
+    CCAA_o == "NC" ~ 662032,
+    CCAA_o == "PV" ~ 2212628,
+    CCAA_o == "RI" ~ 319444,
+    TRUE ~ poblacion_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2021 <- datos_2021 %>%
+  mutate(poblacion_d = case_when(
+   CCAA_d == "AN" ~ 8484804,
+    CCAA_d == "AR" ~ 1331938,
+    CCAA_d == "AS" ~ 1012117,
+    CCAA_d == "IB" ~ 1183415,
+    CCAA_d == "CN" ~ 2178924,
+    CCAA_d == "CB" ~ 584708,
+    CCAA_d == "CL" ~ 2385223,
+    CCAA_d == "CM" ~ 2052505,
+    CCAA_d == "CT" ~ 7749896,
+    CCAA_d == "VC" ~ 5067911,
+    CCAA_d == "EX" ~ 1061636,
+    CCAA_d == "GA" ~ 2698177,
+    CCAA_d == "MD" ~ 6726640,
+    CCAA_d == "MC" ~ 1518279,
+    CCAA_d == "NC" ~ 662032,
+    CCAA_d == "PV" ~ 2212628,
+    CCAA_d == "RI" ~ 319444,
+    TRUE ~ poblacion_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#PIB
+datos_2021 <- datos_2021 %>%
+  mutate(pib_o = case_when(
+    CCAA_o == "AN" ~ 164003435,
+    CCAA_o == "AR" ~ 38159471,
+    CCAA_o == "AS" ~ 23549659,
+    CCAA_o == "IB" ~ 30031668,
+    CCAA_o == "CN" ~ 42843120,
+    CCAA_o == "CB" ~ 14022067,
+    CCAA_o == "CL" ~ 59263791,
+    CCAA_o == "CM" ~ 42852242,
+    CCAA_o == "CT" ~ 232057336,
+    CCAA_o == "VC" ~ 114837367,
+    CCAA_o == "EX" ~ 20649737,
+    CCAA_o == "GA" ~ 63835884,
+    CCAA_o == "MD" ~ 237540292,
+    CCAA_o == "MC" ~ 32719230,
+    CCAA_o == "NC" ~ 20518471,
+    CCAA_o == "PV" ~ 72225883,
+    CCAA_o == "RI" ~ 8619779,
+    TRUE ~ pib_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2021 <- datos_2021 %>%
+  mutate(pib_d = case_when(
+    CCAA_d == "AN" ~ 164003435,
+    CCAA_d == "AR" ~ 38159471,
+    CCAA_d == "AS" ~ 23549659,
+    CCAA_d == "IB" ~ 30031668,
+    CCAA_d == "CN" ~ 42843120,
+    CCAA_d == "CB" ~ 14022067,
+    CCAA_d == "CL" ~ 59263791,
+    CCAA_d == "CM" ~ 42852242,
+    CCAA_d == "CT" ~ 232057336,
+    CCAA_d == "VC" ~ 114837367,
+    CCAA_d == "EX" ~ 20649737,
+    CCAA_d == "GA" ~ 63835884,
+    CCAA_d == "MD" ~ 237540292,
+    CCAA_d == "MC" ~ 32719230,
+    CCAA_d == "NC" ~ 20518471,
+    CCAA_d == "PV" ~ 72225883,
+    CCAA_d == "RI" ~ 8619779,
+    TRUE ~ pib_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#VIVIENDA
+datos_2021 <- datos_2021 %>%
+  mutate(vivienda_o = case_when(
+    CCAA_o == "AN" ~ 125.598,
+    CCAA_o == "AR" ~ 124.019,
+    CCAA_o == "AS" ~ 118.807,
+    CCAA_o == "IB" ~ 143.803,
+    CCAA_o == "CN" ~ 125.792,
+    CCAA_o == "CB" ~ 124.303,
+    CCAA_o == "CL" ~ 118.800,
+    CCAA_o == "CM" ~ 111.669,
+    CCAA_o == "CT" ~ 141.623,
+    CCAA_o == "VC" ~ 121.866,
+    CCAA_o == "EX" ~ 108.771,
+    CCAA_o == "GA" ~ 119.780,
+    CCAA_o == "MD" ~ 147.206,
+    CCAA_o == "MC" ~ 120.327,
+    CCAA_o == "NC" ~ 116.689,
+    CCAA_o == "PV" ~ 123.882,
+    CCAA_o == "RI" ~ 121.331,
+    TRUE ~ vivienda_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2021 <- datos_2021 %>%
+  mutate(vivienda_d = case_when(
+    CCAA_d == "AN" ~ 125.598,
+    CCAA_d == "AR" ~ 124.019,
+    CCAA_d == "AS" ~ 118.807,
+    CCAA_d == "IB" ~ 143.803,
+    CCAA_d == "CN" ~ 125.792,
+    CCAA_d == "CB" ~ 124.303,
+    CCAA_d == "CL" ~ 118.800,
+    CCAA_d == "CM" ~ 111.669,
+    CCAA_d == "CT" ~ 141.623,
+    CCAA_d == "VC" ~ 121.866,
+    CCAA_d == "EX" ~ 108.771,
+    CCAA_d == "GA" ~ 119.780,
+    CCAA_d == "MD" ~ 147.206,
+    CCAA_d == "MC" ~ 120.327,
+    CCAA_d == "NC" ~ 116.689,
+    CCAA_d == "PV" ~ 123.882,
+    CCAA_d == "RI" ~ 121.331,
+    TRUE ~ vivienda_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+
+#DESEMPLEO
+datos_2021 <- datos_2021 %>%
+  mutate(tasa_desempleo_o = case_when(
+    CCAA_o == "AN" ~ 21.85,
+    CCAA_o == "AR" ~ 10.33,
+    CCAA_o == "AS" ~ 12.35,
+    CCAA_o == "IB" ~ 14.32,
+    CCAA_o == "CN" ~ 23.46,
+    CCAA_o == "CB" ~ 11.25,
+    CCAA_o == "CL" ~ 11.61,
+    CCAA_o == "CM" ~ 15.67,
+    CCAA_o == "CT" ~ 11.69,
+    CCAA_o == "VC" ~ 16.08,
+    CCAA_o == "EX" ~ 20.16,
+    CCAA_o == "GA" ~ 11.54,
+    CCAA_o == "MD" ~ 11.69,
+    CCAA_o == "MC" ~ 14.71,
+    CCAA_o == "NC" ~ 10.71,
+    CCAA_o == "PV" ~ 10.29,
+    CCAA_o == "RI" ~ 11.61,
+    TRUE ~ tasa_desempleo_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2021 <- datos_2021 %>%
+  mutate(tasa_desempleo_d = case_when(
+    CCAA_d == "AN" ~ 21.85,
+    CCAA_d == "AR" ~ 10.33,
+    CCAA_d == "AS" ~ 12.35,
+    CCAA_d == "IB" ~ 14.32,
+    CCAA_d == "CN" ~ 23.46,
+    CCAA_d == "CB" ~ 11.25,
+    CCAA_d == "CL" ~ 11.61,
+    CCAA_d == "CM" ~ 15.67,
+    CCAA_d == "CT" ~ 11.69,
+    CCAA_d == "VC" ~ 16.08,
+    CCAA_d == "EX" ~ 20.16,
+    CCAA_d == "GA" ~ 11.54,
+    CCAA_d == "MD" ~ 11.69,
+    CCAA_d == "MC" ~ 14.71,
+    CCAA_d == "NC" ~ 10.71,
+    CCAA_d == "PV" ~ 10.29,
+    CCAA_d == "RI" ~ 11.61,
+    TRUE ~ tasa_desempleo_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+#AMPI
+datos_2021 <- datos_2021 %>%
+  mutate(ampi_o = case_when(
+    CCAA_o == "AN" ~ 98.74,
+    CCAA_o == "AR" ~ 104.35,
+    CCAA_o == "AS" ~ 103.16,
+    CCAA_o == "IB" ~ 103.76,
+    CCAA_o == "CN" ~ 98.87,
+    CCAA_o == "CB" ~ 104.05,
+    CCAA_o == "CL" ~ 101.90,
+    CCAA_o == "CM" ~ 101.29,
+    CCAA_o == "CT" ~ 101.90,
+    CCAA_o == "VC" ~ 103.13,
+    CCAA_o == "EX" ~ 101.57,
+    CCAA_o == "GA" ~ 100.31,
+    CCAA_o == "MD" ~ 102.35,
+    CCAA_o == "MC" ~ 99.78,
+    CCAA_o == "NC" ~ 105.87,
+    CCAA_o == "PV" ~ 103.21,
+    CCAA_o == "RI" ~ 104.71,
+    TRUE ~ ampi_o  # Mantiene el valor original si no coincide con ningún valor de CCAA_o
+  ))
+
+datos_2021 <- datos_2021 %>%
+  mutate(ampi_d = case_when(
+    CCAA_d == "AN" ~ 98.74,
+    CCAA_d == "AR" ~ 104.35,
+    CCAA_d == "AS" ~ 103.16,
+    CCAA_d == "IB" ~ 103.76,
+    CCAA_d == "CN" ~ 98.87,
+    CCAA_d == "CB" ~ 104.05,
+    CCAA_d == "CL" ~ 101.90,
+    CCAA_d == "CM" ~ 101.29,
+    CCAA_d == "CT" ~ 101.90,
+    CCAA_d == "VC" ~ 103.13,
+    CCAA_d == "EX" ~ 101.57,
+    CCAA_d == "GA" ~ 100.31,
+    CCAA_d == "MD" ~ 102.35,
+    CCAA_d == "MC" ~ 99.78,
+    CCAA_d == "NC" ~ 105.87,
+    CCAA_d == "PV" ~ 103.21,
+    CCAA_d == "RI" ~ 104.71,
+    TRUE ~ ampi_d  # Mantiene el valor original si no coincide con ningún valor de CCAA_d
+  ))
+
+```
+
+
+
+
+# GUARDAMOS LOS DATOS EN UN EXCEL
+
+```{r}
+library(openxlsx)
+
+# Crear un nuevo workbook (archivo Excel)
+wb <- createWorkbook()
+
+# Lista de datos y nombres de las hojas
+datos <- list(datos_2008, datos_2009, datos_2010, datos_2011, datos_2012, datos_2013, 
+              datos_2014, datos_2015, datos_2016, datos_2017, datos_2018, datos_2019, 
+              datos_2020, datos_2021)
+
+nombres_hojas <- c("2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", 
+                   "2016", "2017", "2018", "2019", "2020", "2021")
+
+# Añadir cada dataset como una hoja en el workbook
+for(i in 1:length(datos)) {
+  addWorksheet(wb, sheetName = nombres_hojas[i])
+  writeData(wb, sheet = nombres_hojas[i], datos[[i]])
+}
+
+# Guardar el workbook en el archivo Excel
+saveWorkbook(wb, file = "C:/Users/Usuario/Desktop/tfg/DATOS_FINAL_SEPARADOS.xlsx", overwrite = TRUE)
+```
+
+
+# UNIMOS LOS DATOS PARA TENERLOS EN UNA MISMA BASE DE DATOS
+
+```{r}
+datos_finales <- rbind(datos_2008, datos_2009, datos_2010, datos_2011, datos_2012, datos_2013, datos_2014, datos_2015, datos_2016, datos_2017, datos_2018, datos_2019, datos_2020, datos_2021)
+```
+
+
+# Guardamos la base de datos final
+
+```{r}
+write.xlsx(datos_finales, file = "C:/Users/Usuario/Desktop/tfg/DATOS_FINAL_JUNTOS.xlsx")
+```
+
+
+
